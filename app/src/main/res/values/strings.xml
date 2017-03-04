@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">FCI</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">جامعه قناه السويس </string>
+    <string name="slide_1_desc">تسعي جامعه قناه السويس يالطوير بالتعليم في كل المجالات </string>
+
+    <string name="slide_2_title">كلية الحاسيبات والمعلومات </string>
+    <string name="slide_2_desc">الذراع التكنولوجي للجامعه في كافة مجالات التكنولوجيا</string>
+
+    <string name="slide_3_title">SCU_Media</string>
+    <string name="slide_3_desc">Frits App To connect Make Best Connection to Student And Doctors </string>
+
+    <string name="slide_4_title">FCI_SCU</string>
+    <string name="slide_4_desc">Developed By FCI_SCU</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="one">One</string>
+
+
+    <string name="login">Login</string>
+
+    <string name="hello">hello</string>
+
+    <string name="user_email">Email</string>
+
+    <string name="user_password">Password</string>
+
+    <string name="don_t_have_an_account_signup">Don\'t have an account ? SIGNUP</string>
+
+    <string name="login_btn">Login</string>
+
+    <string name="login_loading">Login ...</string>
+
+    <string name="user_name">Username</string>
+
+    <string name="already_have_account">Already have an account? LOGIN</string>
+
+    <string name="register">Sign UP</string>
+
+    <string name="signup">Signup</string>
+
+    <string name="repeat_password">Repeat Password</string>
+
+    <string name="wait">Wait ..</string>
+
+    <string name="title_activity_main">Main</string>
+
+    <string name="enter_email">Please Enter Email !</string>
+
+    <string name="enter_valid_email">Please Enter A valid Email !</string>
+
+    <string name="enter_password">Please Enter Password !</string>
+
+    <string name="enter_username">Please Enter Username !</string>
+
+    <string name="enter_password_again">Please Enter Password Again!</string>
+
+    <string name="password_isnt_equal">Password isn\'t same !</string>
+    <string name="search">Search</string>
+    <string name="check">Ok</string>
+    <string name="update">Update</string>
+    <string name="site">Your Persioal Site</string>
+    <string name="choose_app">Choose app</string>
+    <string name="cancel">Cancel</string>
+    <string name="gallery">gallery</string>
+    <string name="camera">camera</string>
+    <string name="select_picture">select_image</string>
+
+
+</resources>
