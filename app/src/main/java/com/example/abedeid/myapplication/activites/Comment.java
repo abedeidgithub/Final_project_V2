@@ -30,7 +30,7 @@ public class Comment extends Activity {
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view_comments);
         CommentModel post=new CommentModel();
         post.ask_or_post_id=getIntent().getStringExtra("Post_ID");
-            WebService.getInstance().getApi().Commrnts(post).enqueue(new Callback<List<CommentModel>>() {
+            WebService.getInstance().getApi().comments(post).enqueue(new Callback<List<CommentModel>>() {
                 @Override
                 public void onResponse(Call<List<CommentModel>> call, Response<List<CommentModel>> response) {
                     List<CommentModel> commentModels =response.body();

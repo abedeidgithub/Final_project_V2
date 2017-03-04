@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.abedeid.myapplication.R;
+import com.example.abedeid.myapplication.imageCircle.CircleTransform;
 import com.example.abedeid.myapplication.model.CommentModel;
 import com.example.abedeid.myapplication.model.CommentType;
 import com.example.abedeid.myapplication.utils.Session;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -64,11 +67,16 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
             SentTextHolder holder = (SentTextHolder) mHolder;
             holder.tv_time.setText(CurrentMessage.updated_at);
             holder.tv_message_content.setText(CurrentMessage.answer_or_comment_text);
-
+            holder.name_profile.setText(CurrentMessage.name);
+            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
+            Toast.makeText(context, CurrentMessage.name, Toast.LENGTH_SHORT).show();
         } else if (type == CommentType.SENT_IMAGE) {
             SentImageHolder holder = (SentImageHolder) mHolder;
             holder.tv_time.setText(CurrentMessage.updated_at);
+            holder.name_profile.setText(CurrentMessage.name);
+            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
             Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/FB_IMG_1488042460414.jpg").into(holder.img_msg);
+            Toast.makeText(context, CurrentMessage.name, Toast.LENGTH_SHORT).show();
 
 
         } else if (type == CommentType.RECEIVE_TXT) {
@@ -76,12 +84,14 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.tv_time.setText(CurrentMessage.updated_at);
             holder.tv_username.setText(CurrentMessage.name);
             holder.tv_message_content.setText(CurrentMessage.answer_or_comment_text);
+            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
 
 
         } else if (type == CommentType.RECIVE_IMAGE) {
             ReceivedImageHolder holder = (ReceivedImageHolder) mHolder;
             holder.tv_time.setText(CurrentMessage.updated_at);
             holder.tv_username.setText(CurrentMessage.name);
+            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
             Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/FB_IMG_1488042460414.jpg").into(holder.img_msg);
 
         }
@@ -129,6 +139,10 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tv_time;
         @BindView(R.id.tv_message_content)
         TextView tv_message_content;
+        @BindView(R.id.img_profile)
+        ImageView img_profile;
+        @BindView(R.id.name_profile)
+        TextView name_profile;
 
         public SentTextHolder(View itemView) {
             super(itemView);
@@ -142,6 +156,10 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tv_time;
         @BindView(R.id.img_msg)
         ImageView img_msg;
+        @BindView(R.id.img_profile)
+        ImageView img_profile;
+        @BindView(R.id.name_profile)
+        TextView name_profile;
 
         public SentImageHolder(View itemView) {
             super(itemView);
@@ -155,8 +173,11 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tv_time;
         @BindView(R.id.tv_message_content)
         TextView tv_message_content;
-        @BindView(R.id.tv_username)
+        @BindView(R.id.name_profile)
         TextView tv_username;
+
+        @BindView(R.id.img_profile)
+        ImageView img_profile;
 
         public ReceivedTextHolder(View itemView) {
             super(itemView);
@@ -170,8 +191,11 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tv_time;
         @BindView(R.id.img_msg)
         ImageView img_msg;
-        @BindView(R.id.tv_username)
+        @BindView(R.id.name_profile)
         TextView tv_username;
+
+        @BindView(R.id.img_profile)
+        ImageView img_profile;
 
         public ReceivedImageHolder(View itemView) {
             super(itemView);

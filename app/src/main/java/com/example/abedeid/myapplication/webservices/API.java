@@ -30,7 +30,7 @@ public interface API {
     Call<List<Post>> Posts(@Body users users);
 
     @POST("answer_or_comment.php")
-    Call<List<CommentModel>> Commrnts(@Body CommentModel commentModel);
+    Call<List<CommentModel>> comments(@Body CommentModel commentModel);
 
 
 //    @POST("upload_img.php")
