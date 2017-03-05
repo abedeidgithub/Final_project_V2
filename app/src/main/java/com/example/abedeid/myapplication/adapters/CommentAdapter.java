@@ -1,26 +1,28 @@
 package com.example.abedeid.myapplication.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.R;
-import com.example.abedeid.myapplication.imageCircle.CircleTransform;
 import com.example.abedeid.myapplication.model.CommentModel;
 import com.example.abedeid.myapplication.model.CommentType;
 import com.example.abedeid.myapplication.utils.Session;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * Created by Abed Eid on 3/2/2017.
@@ -64,35 +66,65 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
          * check message type and init holder to user it and set data in the right place for every view
          */
         if (type == CommentType.SENT_TXT) {
-            SentTextHolder holder = (SentTextHolder) mHolder;
+            final SentTextHolder holder = (SentTextHolder) mHolder;
             holder.tv_time.setText(CurrentMessage.updated_at);
             holder.tv_message_content.setText(CurrentMessage.answer_or_comment_text);
             holder.name_profile.setText(CurrentMessage.name);
-            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
-            Toast.makeText(context, CurrentMessage.name, Toast.LENGTH_SHORT).show();
+
+            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.img_profile.setImageDrawable(circularBitmapDrawable);
+                }
+            });
         } else if (type == CommentType.SENT_IMAGE) {
-            SentImageHolder holder = (SentImageHolder) mHolder;
+            final SentImageHolder holder = (SentImageHolder) mHolder;
             holder.tv_time.setText(CurrentMessage.updated_at);
             holder.name_profile.setText(CurrentMessage.name);
-            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
-            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/FB_IMG_1488042460414.jpg").into(holder.img_msg);
-            Toast.makeText(context, CurrentMessage.name, Toast.LENGTH_SHORT).show();
+            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.img_profile.setImageDrawable(circularBitmapDrawable);
+                }
+            });            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/FB_IMG_1488042460414.jpg").into(holder.img_msg);
 
 
         } else if (type == CommentType.RECEIVE_TXT) {
-            ReceivedTextHolder holder = (ReceivedTextHolder) mHolder;
+            final ReceivedTextHolder holder = (ReceivedTextHolder) mHolder;
             holder.tv_time.setText(CurrentMessage.updated_at);
             holder.tv_username.setText(CurrentMessage.name);
             holder.tv_message_content.setText(CurrentMessage.answer_or_comment_text);
-            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
-
+            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.img_profile.setImageDrawable(circularBitmapDrawable);
+                }
+            });
 
         } else if (type == CommentType.RECIVE_IMAGE) {
-            ReceivedImageHolder holder = (ReceivedImageHolder) mHolder;
+            final ReceivedImageHolder holder = (ReceivedImageHolder) mHolder;
             holder.tv_time.setText(CurrentMessage.updated_at);
             holder.tv_username.setText(CurrentMessage.name);
-            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.img_profile);
-            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/FB_IMG_1488042460414.jpg").into(holder.img_msg);
+
+            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.img_profile.setImageDrawable(circularBitmapDrawable);
+                }
+            });
+            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").into(holder.img_msg);
 
         }
 

@@ -3,9 +3,12 @@ package com.example.abedeid.myapplication.Fragments;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.R;
-import com.example.abedeid.myapplication.imageCircle.CircleTransform;
 import com.example.abedeid.myapplication.model.users;
 import com.example.abedeid.myapplication.utils.Session;
 import com.squareup.picasso.Picasso;
@@ -33,7 +37,7 @@ public class Profile extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
 
-          ImageButton user_profile_photo = (ImageButton) view.findViewById(R.id.user_profile_photo);
+          final ImageButton user_profile_photo = (ImageButton) view.findViewById(R.id.user_profile_photo);
           ImageView header_cover_image = (ImageView) view.findViewById(R.id.header_cover_image);
           TextView user_profile_name=(TextView)view.findViewById(R.id.user_profile_name);
           TextView  user_profile_email=(TextView)view.findViewById(R.id.user_profile_email);
@@ -48,8 +52,15 @@ public class Profile extends Fragment {
 
             user_profile_name.setText( users.name);
             user_profile_email.setText(users.email.toString());
-            Picasso.with(getContext()).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(user_profile_photo);
-            user_profile_photo.setOnClickListener(new View.OnClickListener() {
+            Glide.with(getContext()).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(user_profile_photo) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(getActivity().getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    user_profile_photo.setImageDrawable(circularBitmapDrawable);
+                }
+            });            user_profile_photo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     getImage();

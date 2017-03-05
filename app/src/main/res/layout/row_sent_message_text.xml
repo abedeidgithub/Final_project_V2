@@ -2,18 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="2dp"
-        android:gravity="end"
-        android:paddingRight="10dp"
-        android:text="12:20 AM"
-        android:textSize="11sp" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -64,4 +56,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_weight="5.13"
+        android:gravity="center"
+        android:text="12:20 AM"
+        android:textSize="11sp" />
 </LinearLayout>

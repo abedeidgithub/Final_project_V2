@@ -1,6 +1,7 @@
 package com.example.abedeid.myapplication.webservices;
 
 
+import com.example.abedeid.myapplication.Fragments.PostOrAsk;
 import com.example.abedeid.myapplication.model.CommentModel;
 import com.example.abedeid.myapplication.model.MainResponse;
 import com.example.abedeid.myapplication.model.Post;
@@ -11,7 +12,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by abed_eid on 08/12/2016.
@@ -31,13 +35,6 @@ public interface API {
 
     @POST("answer_or_comment.php")
     Call<List<CommentModel>> comments(@Body CommentModel commentModel);
-
-
-//    @POST("upload_img.php")
-//    Call<List<MainResponse>> loginStudent(@Body sentBody body);
-
-
-
 
 
     @POST("select-users.php")

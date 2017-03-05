@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
 
-public class users extends RealmObject{
+public class users extends RealmObject {
 
 
     @SerializedName("id")
@@ -41,5 +41,7 @@ public class users extends RealmObject{
     public String user_site;
     @SerializedName("verify")
     public String verify;
+
+public  int Page;
 
 }

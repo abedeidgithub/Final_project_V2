@@ -69,6 +69,7 @@
     <string name="gallery">gallery</string>
     <string name="camera">camera</string>
     <string name="select_picture">select_image</string>
+    <string name="comment">Your Comment Here</string>
 
 
 </resources>

@@ -23,32 +23,39 @@ public class Comment extends Activity {
 
     private CommentAdapter adapter;
     RecyclerView recycler_view;
+
+    List<CommentModel> commentModels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view_comments);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(Comment.this);
+        recycler_view.setLayoutManager(linearLayoutManager);
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
         CommentModel post=new CommentModel();
         post.ask_or_post_id=getIntent().getStringExtra("Post_ID");
-            WebService.getInstance().getApi().comments(post).enqueue(new Callback<List<CommentModel>>() {
-                @Override
-                public void onResponse(Call<List<CommentModel>> call, Response<List<CommentModel>> response) {
-                    List<CommentModel> commentModels =response.body();
+        getCommentsOfPages(post);
 
 
-                    adapter=new CommentAdapter(commentModels,Comment.this);
-                    recycler_view.setLayoutManager(new LinearLayoutManager(Comment.this));
-                    recycler_view.setItemAnimator(new DefaultItemAnimator());
-                    recycler_view.setAdapter(adapter);
-                }
+    }
 
-                @Override
-                public void onFailure(Call<List<CommentModel>> call, Throwable t) {
-                    Toast.makeText(Comment.this, "error users is null  ", Toast.LENGTH_SHORT).show();
+    private void getCommentsOfPages(CommentModel post) {
+        WebService.getInstance().getApi().comments(post).enqueue(new Callback<List<CommentModel>>() {
+            @Override
+            public void onResponse(Call<List<CommentModel>> call, Response<List<CommentModel>> response) {
+                List<CommentModel> commentModels =response.body();
 
-                }
-            });
+                adapter=new CommentAdapter(commentModels,Comment.this);
 
+                recycler_view.setAdapter(adapter);
+            }
 
+            @Override
+            public void onFailure(Call<List<CommentModel>> call, Throwable t) {
+                Toast.makeText(Comment.this, "error users is null  ", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 }

@@ -2,6 +2,9 @@ package com.example.abedeid.myapplication.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.activites.Comment;
-import com.example.abedeid.myapplication.imageCircle.CircleTransform;
 import com.example.abedeid.myapplication.model.Post;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,19 +47,33 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         final Post CurrentPost = postList.get(position);
         holder.post_txt.setText(CurrentPost.ask_or_post_text);
-        holder.writer_post_name.setText(CurrentPost.name);
+        holder.writer_post_name.setText( CurrentPost.id+" - "+CurrentPost.name);
         holder.writer_post_time.setText(CurrentPost.created_at);
         holder.comment_number.setText(CurrentPost.comments+" Comments");
         if(CurrentPost.image!=null){
-            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/FB_IMG_1488042460414.jpg").transform(new CircleTransform()).into(holder.image_post);
-
+            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.image_post.setImageDrawable(circularBitmapDrawable);
+                }
+            });
         }else {
-            Picasso.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").transform(new CircleTransform()).into(holder.image_post);
-        }
+            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    RoundedBitmapDrawable circularBitmapDrawable =
+                            RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+                    circularBitmapDrawable.setCircular(true);
+                    holder.image_post.setImageDrawable(circularBitmapDrawable);
+                }
+            });        }
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
