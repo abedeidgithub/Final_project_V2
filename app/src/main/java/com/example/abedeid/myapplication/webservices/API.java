@@ -2,6 +2,7 @@ package com.example.abedeid.myapplication.webservices;
 
 
 import com.example.abedeid.myapplication.Fragments.PostOrAsk;
+import com.example.abedeid.myapplication.activites.Comment;
 import com.example.abedeid.myapplication.model.CommentModel;
 import com.example.abedeid.myapplication.model.MainResponse;
 import com.example.abedeid.myapplication.model.Post;
@@ -42,5 +43,9 @@ public interface API {
 
     @POST("select-schedule.php")
     Call<List<Schedule>> getSchedule(@Body Schedule schedule);
+
+
+    @POST("insertComment.php")
+    Call<CommentModel> insert_Comment(@Body CommentModel commentModel);
 
 }
