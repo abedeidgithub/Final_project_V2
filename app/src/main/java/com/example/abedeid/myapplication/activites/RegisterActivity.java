@@ -132,9 +132,12 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<MainResponse> call, Throwable t) {
                             Log.d(TAG, t.getLocalizedMessage());
+                            Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
 
                         }
                     });
+                    setNormalMode();
 
 
                     break;

@@ -1,5 +1,6 @@
 package com.example.abedeid.myapplication.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -80,12 +81,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
                 Intent intent=new Intent(context, Comment.class);
                 intent.putExtra("Post_ID",CurrentPost.id);
                 context.startActivity(intent);
+                ((Activity) context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_left);
+
 
 
             }
         });
 
     }
+
 
     @Override
     public int getItemCount() {

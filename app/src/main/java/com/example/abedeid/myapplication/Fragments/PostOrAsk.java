@@ -28,11 +28,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PostOrAsk extends Fragment {
+    private int positionIndex;
+    private int topView;
     private final String TAG = "PostOrAskTAG";
     List<Post> postList;
     private PostsAdapter adapter;
     RecyclerView recycler_view;
+    LinearLayoutManager linearLayoutManager;
     users user;
+    int  pageNumber = 1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +51,6 @@ public class PostOrAsk extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         user = Session.getInstance().getUser();
-        int  pageNumber = 1;
         if (user != null) {
 
            final users s = new users();
@@ -57,7 +61,7 @@ public class PostOrAsk extends Fragment {
             s.department = user.department;
             s.email = user.email;
             postList = new ArrayList<>();
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            linearLayoutManager = new LinearLayoutManager(getContext());
             recycler_view.setLayoutManager(linearLayoutManager);
             recycler_view.setItemAnimator(new DefaultItemAnimator());
             adapter=new PostsAdapter(postList,getContext());
@@ -65,19 +69,32 @@ public class PostOrAsk extends Fragment {
             recycler_view.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
                 @Override
                 public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-
-                    page++;
-                    getPostOfPages(s,page);
-
-
+                    pageNumber++;
+                    getPostOfPages(s,pageNumber);
                 }
             });
             getPostOfPages(s,1);
 
-
         } else {
             Toast.makeText(getContext(), "error users is null  ", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        positionIndex= linearLayoutManager.findFirstVisibleItemPosition();
+        View startView = recycler_view.getChildAt(0);
+        topView = (startView == null) ? 0 : (startView.getTop() - recycler_view.getPaddingTop());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        onActivityCreated(this.getArguments());
+        linearLayoutManager.scrollToPositionWithOffset(positionIndex, topView);
     }
 
     private void getPostOfPages(users s, int pageNumber) {

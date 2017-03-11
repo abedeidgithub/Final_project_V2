@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 
+import com.example.abedeid.myapplication.Fragments.PostOrAsk;
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.adapters.CommentAdapter;
 import com.example.abedeid.myapplication.model.CommentModel;
@@ -74,6 +75,13 @@ public class Comment extends Activity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.enter_from_left, R.anim.exit_out_right);
+
+
+    }
 
     private void getCommentsOfPages(CommentModel post) {
         WebService.getInstance().getApi().comments(post).enqueue(new Callback<List<CommentModel>>() {
