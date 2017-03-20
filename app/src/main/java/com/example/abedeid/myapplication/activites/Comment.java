@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,11 +15,22 @@ import android.widget.Toast;
 import com.example.abedeid.myapplication.Fragments.PostOrAsk;
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.adapters.CommentAdapter;
+import com.example.abedeid.myapplication.fcm.FirebaseService;
 import com.example.abedeid.myapplication.model.CommentModel;
 import com.example.abedeid.myapplication.model.users;
 import com.example.abedeid.myapplication.utils.Session;
 import com.example.abedeid.myapplication.webservices.WebService;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,7 +60,7 @@ public class Comment extends Activity {
         post.ask_or_post_id = getIntent().getStringExtra("Post_ID");
         getCommentsOfPages(post);
         final users user = Session.getInstance().getUser();
-
+       // DownloadFromUrl("http://fci-suze.esy.es/Webservices/uploads/FB_IMG_1457572882947.jpg","FB_IMG.jpg");
 
         insertComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +85,70 @@ public class Comment extends Activity {
                 });
             }
         });
+
+
+
+        Log.e("TAAAAAG", FirebaseInstanceId.getInstance().getToken());
+        FirebaseMessaging.getInstance().subscribeToTopic(post.ask_or_post_id);
+        Log.e("TAAAAAG",post.ask_or_post_id);
     }
 
+
+
+
+
+    ///
+
+    public void DownloadFromUrl(String DownloadUrl, String fileName) {
+
+        try {
+            File root = android.os.Environment.getExternalStorageDirectory();
+
+            File dir = new File (root.getAbsolutePath() + "/xmls");
+            if(dir.exists()==false) {
+                dir.mkdirs();
+            }
+
+            URL url = new URL(DownloadUrl); //you can write here any link
+            File file = new File(dir, fileName);
+
+            long startTime = System.currentTimeMillis();
+            Log.d("DownloadManager", "download begining");
+            Log.d("DownloadManager", "download url:" + url);
+            Log.d("DownloadManager", "downloaded file name:" + fileName);
+
+           /* Open a connection to that URL. */
+            URLConnection ucon = url.openConnection();
+
+
+            InputStream is = ucon.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+            FileOutputStream fos = new FileOutputStream(file);
+
+            int current = 0;
+            while ((current = bis.read()) != -1) {
+                fos.write(current);
+            }
+
+            fos.close();
+            Log.d("DownloadManager", "download ready in" + ((System.currentTimeMillis() - startTime) / 1000) + " sec");
+
+        } catch (IOException e) {
+            Log.d("DownloadManager", "Error: " + e);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+    //
     @Override
     public void onBackPressed() {
         super.onBackPressed();

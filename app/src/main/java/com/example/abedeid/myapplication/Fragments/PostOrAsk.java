@@ -86,15 +86,15 @@ public class PostOrAsk extends Fragment {
     public void onPause() {
         super.onPause();
         positionIndex= linearLayoutManager.findFirstVisibleItemPosition();
-        View startView = recycler_view.getChildAt(0);
-        topView = (startView == null) ? 0 : (startView.getTop() - recycler_view.getPaddingTop());
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        onActivityCreated(this.getArguments());
-        linearLayoutManager.scrollToPositionWithOffset(positionIndex, topView);
+//        linearLayoutManager.scrollToPositionWithOffset(positionIndex, topView);
+        linearLayoutManager.scrollToPosition(positionIndex);
+
     }
 
     private void getPostOfPages(users s, int pageNumber) {

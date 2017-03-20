@@ -55,8 +55,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        android:layout_below="@+id/rllt_loading"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/rllt_loading">
 
         <LinearLayout
             android:id="@+id/lnlt_inputs_container"
@@ -157,7 +157,7 @@
             android:textColor="@color/colorWhite" />
 
         <Button
-            android:id="@+id/btn_udate"
+            android:id="@+id/updateBtn_st"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginBottom="21dp"

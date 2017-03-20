@@ -1,5 +1,6 @@
 package com.example.abedeid.myapplication.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,16 +17,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+
 
 import com.example.abedeid.myapplication.R;
-import com.example.abedeid.myapplication.model.users;
+ import com.example.abedeid.myapplication.model.users;
 import com.example.abedeid.myapplication.utils.Session;
+import com.example.abedeid.myapplication.webservices.WebService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class Update_data extends AppCompatActivity {
     public static final String TAG = "RegisterActivityTAG";
@@ -44,8 +51,9 @@ public class Update_data extends AppCompatActivity {
     LinearLayout lnltInputsContainer;
     @BindView(R.id.tv_already_have_account)
     TextView tvAlreadyHaveAccount;
-    @BindView(R.id.btn_udate)
-    Button btnSignup;
+    @BindView(R.id.updateBtn_st)
+    Button btnUpdateSt;
+
     @BindView(R.id.rllt_body)
     RelativeLayout rlltBody;
     @BindView(R.id.prgs_loading)
@@ -68,14 +76,85 @@ public class Update_data extends AppCompatActivity {
         super.onCreate(savedInstanceState);
      if(user.user_flage.equals("4")){
         setContentView(R.layout.activity_update_data_st);
-         ButterKnife.bind(this);
+        ButterKnife.bind(this);
          initCustomSpinner();
+         btnUpdateSt.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+
+
+
+                 final users s = new users();
+                 s.id=Session.getInstance().getUser().id;
+                 s.name = etUsername.getText().toString();
+                 s.password = etPassword.getText().toString();
+                 s.year = _year.getSelectedItem().toString();
+                 s.section = _section.getSelectedItem().toString();
+                 s.department = _depart.getSelectedItem().toString();
+
+                  update_St_Data(s);
+
+
+             }
+         });
+
+
+
 
         }else {
-//         ButterKnife.bind(this);
+
+
          setContentView(R.layout.activity_update_data_dr);
+         final EditText site=(EditText) findViewById(R.id.et_usersite_udate_dr);
+         btnUpdateSt.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+
+
+
+                 final users s = new users();
+                 s.id=Session.getInstance().getUser().id;
+                 s.name = etUsername.getText().toString();
+                 s.password = etPassword.getText().toString();
+                s.user_site=site.getText().toString();
+
+                 update_St_Data(s);
+
+
+             }
+         });
+
+
+
 
      }
+
+
+
+
+
+
+    }
+/*
+*    WebService.getInstance().getApi().registerStudent(s).enqueue(new Callback<MainResponse>() {
+*
+*    */
+    private void update_St_Data(users s) {
+
+        WebService.getInstance().getApi().updateUser(s).enqueue(new Callback<List<users>>() {
+            @Override
+            public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+                Toast.makeText(Update_data.this, "updated ", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<users>> call, Throwable t) {
+                Toast.makeText(Update_data.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
 
 
     }

@@ -135,7 +135,7 @@
             android:textColor="@color/colorWhite" />
 
         <Button
-            android:id="@+id/btn_udate_dr"
+            android:id="@+id/updateBtn_st"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginBottom="21dp"

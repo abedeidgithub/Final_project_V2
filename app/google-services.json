@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "785228405481",
+    "firebase_url": "https://fcisuez-ee93f.firebaseio.com",
+    "project_id": "fcisuez-ee93f",
+    "storage_bucket": "fcisuez-ee93f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785228405481:android:281dcc9a15eaddbf",
+        "android_client_info": {
+          "package_name": "com.example.abedeid.myapplication.Fragments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785228405481-2co7k5qiibtve7krvk7ad3m40fqdab89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq6XtiV-9lSu1_BPKptFXmYawpW-Bj2hU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785228405481:android:e37ba5383c20c65b",
+        "android_client_info": {
+          "package_name": "com.example.abedeid.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785228405481-2co7k5qiibtve7krvk7ad3m40fqdab89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq6XtiV-9lSu1_BPKptFXmYawpW-Bj2hU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -48,4 +48,7 @@ public interface API {
     @POST("insertComment.php")
     Call<CommentModel> insert_Comment(@Body CommentModel commentModel);
 
+    @POST("/Webservices/updateUser.php")
+    Call<List<users>> updateUser(@Body users userModel);
+
 }
