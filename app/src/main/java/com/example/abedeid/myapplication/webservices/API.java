@@ -4,10 +4,15 @@ package com.example.abedeid.myapplication.webservices;
 import com.example.abedeid.myapplication.Fragments.PostOrAsk;
 import com.example.abedeid.myapplication.activites.Comment;
 import com.example.abedeid.myapplication.model.CommentModel;
+import com.example.abedeid.myapplication.model.Days;
+import com.example.abedeid.myapplication.model.Department;
 import com.example.abedeid.myapplication.model.MainResponse;
 import com.example.abedeid.myapplication.model.Post;
 import com.example.abedeid.myapplication.model.Schedule;
+import com.example.abedeid.myapplication.model.Section;
+import com.example.abedeid.myapplication.model.news;
 import com.example.abedeid.myapplication.model.users;
+import com.example.abedeid.myapplication.model.year;
 
 import java.util.List;
 
@@ -25,18 +30,32 @@ import retrofit2.http.Query;
 public interface API {
 
 
-    @POST("login.php")
-    Call<List<MainResponse>> loginUsers(@Body users users);
+    @POST("selects/selct_user.php")
+    Call<List<users>> loginUsers(@Body users users);
 
-    @POST("insertUser.php")
+    @POST("selects/select_year.php")
+    Call<List<year>> getYear();
+
+    @POST(" selects/select_day.php")
+    Call<List<Days>> getDay();
+
+    @POST(" selects/select_dept.php")
+    Call<List<Department>> getdepartment();
+
+    @POST("selects/select_section.php")
+    Call<List<Section>> getsection();
+
+    @POST("insert/insert_user.php")
     Call<MainResponse> registerStudent(@Body users users);
 
-    @POST("ask_or_post.php")
+    @POST("selects/select_posts.php")
     Call<List<Post>> Posts(@Body users users);
 
-    @POST("answer_or_comment.php")
+    @POST("selects/select_comments.php")
     Call<List<CommentModel>> comments(@Body CommentModel commentModel);
 
+    @POST("selects/select_news.php")
+    Call<List<news>> getnews(@Body users s);
 
     @POST("select-users.php")
     Call<List<users>> getStudent(@Body users users);

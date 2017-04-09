@@ -8,33 +8,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class Post {
 
-
-    @SerializedName("id")
-    public String id;
-    @SerializedName("ask_or_post_text")
-    public String ask_or_post_text;
-    @SerializedName("user_id")
-    public String user_id;
-    @SerializedName("created_at")
-    public String created_at;
-    @SerializedName("updated_at")
-    public String updated_at;
-    @SerializedName("ask_or_post_flag")
-    public String ask_or_post_flag;
-    @SerializedName("year")
-    public String year;
-    @SerializedName("department")
-    public String department;
-    @SerializedName("section")
-    public String section;
-    @SerializedName("comments")
-    public int comments;
+    @SerializedName("id_post")
+    public int id_post;
+    @SerializedName("text")
+    public String text;
+    @SerializedName("post_image")
+    public String post_image;
+    @SerializedName("createdat")
+    public String createdat;
+    @SerializedName("updatedat")
+    public String updatedat;
+    @SerializedName("section_id")
+    public int section_id;
+    @SerializedName("depart_id")
+    public int depart_id;
+    @SerializedName("year_id")
+    public int year_id;
     @SerializedName("name")
     public String name;
-    @SerializedName("image")
-    public String image;
-    @SerializedName("success")
-    public boolean success;
-    @SerializedName("message")
-    public String message;
+    @SerializedName("user_image")
+    public String user_image;
+    @SerializedName("user_id")
+    public int user_id;
+    @SerializedName("isAdmin")
+    public int isAdmin;
 }

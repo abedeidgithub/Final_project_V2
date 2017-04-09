@@ -66,8 +66,8 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
          */
         if (type == CommentType.SENT_TXT) {
             final SentTextHolder holder = (SentTextHolder) mHolder;
-            holder.tv_time.setText(CurrentMessage.updated_at);
-            holder.tv_message_content.setText(CurrentMessage.answer_or_comment_text);
+            holder.tv_time.setText(CurrentMessage.updatedat);
+            holder.tv_message_content.setText(CurrentMessage.txt);
             holder.name_profile.setText(CurrentMessage.name);
 
             Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
@@ -81,7 +81,7 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
             });
         } else if (type == CommentType.SENT_IMAGE) {
             final SentImageHolder holder = (SentImageHolder) mHolder;
-            holder.tv_time.setText(CurrentMessage.updated_at);
+            holder.tv_time.setText(CurrentMessage.updatedat);
             holder.name_profile.setText(CurrentMessage.name);
             Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
                 @Override
@@ -96,9 +96,9 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
 
         } else if (type == CommentType.RECEIVE_TXT) {
             final ReceivedTextHolder holder = (ReceivedTextHolder) mHolder;
-            holder.tv_time.setText(CurrentMessage.updated_at);
+            holder.tv_time.setText(CurrentMessage.updatedat);
             holder.tv_username.setText(CurrentMessage.name);
-            holder.tv_message_content.setText(CurrentMessage.answer_or_comment_text);
+            holder.tv_message_content.setText(CurrentMessage.txt);
             Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
                 @Override
                 protected void setResource(Bitmap resource) {
@@ -111,7 +111,7 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
 
         } else if (type == CommentType.RECIVE_IMAGE) {
             final ReceivedImageHolder holder = (ReceivedImageHolder) mHolder;
-            holder.tv_time.setText(CurrentMessage.updated_at);
+            holder.tv_time.setText(CurrentMessage.updatedat);
             holder.tv_username.setText(CurrentMessage.name);
 
             Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.img_profile) {
@@ -142,25 +142,25 @@ public class CommentAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
          * then check if message is text or img
          */
 
-        String userID = Session.getInstance().getUser().id;
+//        String userID = Session.getInstance().getUser().id;
         CommentModel comment = comments.get(position);
+//
+//        if (userID.equals(comment.user_id)) {
+////type is image or txt
+//            if (comment.type.equals("0")) {
+//                return CommentType.SENT_TXT;
+//            } else if (comment.type.equals("1")) {
+//                return CommentType.SENT_IMAGE;
+//            }
+//
+//        } else {
+//            if (comment.type.equals("0")) {
+//                return CommentType.RECEIVE_TXT;
+//            } else if (comment.type.equals("1")) {
+//                return CommentType.RECIVE_IMAGE;
+//            }
 
-        if (userID.equals(comment.user_id)) {
-//type is image or txt
-            if (comment.type.equals("0")) {
-                return CommentType.SENT_TXT;
-            } else if (comment.type.equals("1")) {
-                return CommentType.SENT_IMAGE;
-            }
-
-        } else {
-            if (comment.type.equals("0")) {
-                return CommentType.RECEIVE_TXT;
-            } else if (comment.type.equals("1")) {
-                return CommentType.RECIVE_IMAGE;
-            }
-
-        }
+//        }
         return super.getItemViewType(position);
     }
 

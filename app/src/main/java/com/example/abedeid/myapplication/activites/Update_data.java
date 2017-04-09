@@ -71,63 +71,63 @@ public class Update_data extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        users user= Session.getInstance().getUser();
-        Log.d("TAGs",user.user_flage.toString());
-        super.onCreate(savedInstanceState);
-     if(user.user_flage.equals("4")){
-        setContentView(R.layout.activity_update_data_st);
-        ButterKnife.bind(this);
-         initCustomSpinner();
-         btnUpdateSt.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-
-
-
-                 final users s = new users();
-                 s.id=Session.getInstance().getUser().id;
-                 s.name = etUsername.getText().toString();
-                 s.password = etPassword.getText().toString();
-                 s.year = _year.getSelectedItem().toString();
-                 s.section = _section.getSelectedItem().toString();
-                 s.department = _depart.getSelectedItem().toString();
-
-                  update_St_Data(s);
-
-
-             }
-         });
-
-
-
-
-        }else {
-
-
-         setContentView(R.layout.activity_update_data_dr);
-         final EditText site=(EditText) findViewById(R.id.et_usersite_udate_dr);
-         btnUpdateSt.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-
-
-
-                 final users s = new users();
-                 s.id=Session.getInstance().getUser().id;
-                 s.name = etUsername.getText().toString();
-                 s.password = etPassword.getText().toString();
-                s.user_site=site.getText().toString();
-
-                 update_St_Data(s);
-
-
-             }
-         });
-
-
-
-
-     }
+//        users user= Session.getInstance().getUser();
+//        Log.d("TAGs",user.user_flage.toString());
+//        super.onCreate(savedInstanceState);
+//     if(user.user_flage.equals("4")){
+//        setContentView(R.layout.activity_update_data_st);
+//        ButterKnife.bind(this);
+//         initCustomSpinner();
+//         btnUpdateSt.setOnClickListener(new View.OnClickListener() {
+//             @Override
+//             public void onClick(View view) {
+//
+//
+////
+////                 final users s = new users();
+////                 s.id=Session.getInstance().getUser().id;
+////                 s.name = etUsername.getText().toString();
+////                 s.password = etPassword.getText().toString();
+////                 s.year = _year.getSelectedItem().toString();
+////                 s.section = _section.getSelectedItem().toString();
+////                 s.department = _depart.getSelectedItem().toString();
+//
+//                  update_St_Data(s);
+//
+//
+//             }
+//         });
+//
+//
+//
+//
+//        }else {
+//
+//
+//         setContentView(R.layout.activity_update_data_dr);
+//         final EditText site=(EditText) findViewById(R.id.et_usersite_udate_dr);
+//         btnUpdateSt.setOnClickListener(new View.OnClickListener() {
+//             @Override
+//             public void onClick(View view) {
+//
+//
+//
+//                 final users s = new users();
+//                 s.id=Session.getInstance().getUser().id;
+//                 s.name = etUsername.getText().toString();
+//                 s.password = etPassword.getText().toString();
+//                s.user_site=site.getText().toString();
+//
+//                 update_St_Data(s);
+//
+//
+//             }
+//         });
+//
+//
+//
+//
+//     }
 
 
 

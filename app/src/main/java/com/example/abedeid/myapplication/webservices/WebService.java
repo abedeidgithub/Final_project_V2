@@ -17,7 +17,7 @@ public class WebService {
         OkHttpClient client = new OkHttpClient.Builder().build();
         Retrofit retrofit = new Retrofit.Builder().client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Urls.WEB_URL)
+                .baseUrl(Urls.Local_URL)
                 .build();
         api = retrofit.create(API.class);
 

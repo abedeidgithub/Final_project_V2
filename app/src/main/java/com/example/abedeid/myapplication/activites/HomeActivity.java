@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 
+import com.example.abedeid.myapplication.Fragments.News;
 import com.example.abedeid.myapplication.Fragments.PostOrAsk;
 import com.example.abedeid.myapplication.Fragments.Profile;
 import com.example.abedeid.myapplication.Fragments.ScheduleFragment;
@@ -74,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         adapter.addFragment(new ScheduleFragment(), "Schedule");
         adapter.addFragment(new Profile(), "profile");
         adapter.addFragment(new PostOrAsk(), "Poats");
-        adapter.addFragment(new ScheduleFragment(), "ONE");
+        adapter.addFragment(new News(), "ONE");
         adapter.addFragment(new ScheduleFragment(), "TWO");
         adapter.addFragment(new ScheduleFragment(), "THREE");
         adapter.addFragment(new ScheduleFragment(), "ONE");

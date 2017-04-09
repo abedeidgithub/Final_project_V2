@@ -33,17 +33,17 @@ public class ScheduleFragment extends Fragment {
         users users = Session.getInstance().getUser();
         if (users != null) {
             Toast.makeText(getContext(), users.email, Toast.LENGTH_SHORT).show();
-            Log.d("LoginActivityTAG",
-                            users.name+"\n"
-                            +users.email.toString()+"\n"
-                            +users.password.toString()+"\n"
-                            +users.id.toString()+"\n"
-                            +users.year.toString()+"\n"
-                            +users.section.toString()+"\n"
-                            +users.department.toString()+"\n"
-                            +users.user_flage.toString()+"\n"
-                            +users.image+"\n"
-                            +users.user_token+"\n"
+            Log.d("LoginActivityTAG","ui"
+//                            users.name+"\n"
+//                            +users.email.toString()+"\n"
+//                            +users.password.toString()+"\n"
+//                            +users.id.toString()+"\n"
+//                            +users.year.toString()+"\n"
+//                            +users.section.toString()+"\n"
+//                            +users.department.toString()+"\n"
+//                            +users.user_flage.toString()+"\n"
+//                            +users.image+"\n"
+//                            +users.user_token+"\n"
             );
         }else{
             Toast.makeText(getContext(), "Null", Toast.LENGTH_SHORT).show();

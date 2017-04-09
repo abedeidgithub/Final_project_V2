@@ -90,39 +90,19 @@ public class LoginActivity extends AppCompatActivity {
 
 //                    // login User using Retrofit
 
-                    WebService.getInstance().getApi().loginUsers(s).enqueue(new Callback<List<MainResponse>>() {
+                    WebService.getInstance().getApi().loginUsers(s).enqueue(new Callback<List<users>>() {
                         @Override
-                        public void onResponse(Call<List<MainResponse>> call, Response<List<MainResponse>> response) {
-                            if (response.body().get(0).getStatus() == false) {
+                        public void onResponse(Call<List<users>> call, Response<List<users>> response) {
+                           String p= response.body().get(0).verify;
+                           Boolean dp= response.body().get(0).status;
+                            if (response.body().get(0).status == false) {
                                 setNormalMode();
-                                Toast.makeText(LoginActivity.this, response.body().get(0).getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, response.body().get(0).message, Toast.LENGTH_SHORT).show();
                             } else {
                                 if (response.body().get(0).verify.equals("true")) {
-                                    Log.d(TAG,
-                                            response.body().get(0).name + "\n"
-                                                    + response.body().get(0).email.toString() + "\n"
-                                                    + response.body().get(0).password.toString() + "\n"
-                                                    + response.body().get(0).id.toString() + "\n"
-                                                    + response.body().get(0).year.toString() + "\n"
-                                                    + response.body().get(0).section.toString() + "\n"
-                                                    + response.body().get(0).department.toString() + "\n"
-                                                    + response.body().get(0).user_flage.toString() + "\n"
-                                                    + response.body().get(0).image + "\n"
-                                                    + response.body().get(0).user_token + "\n"
-                                    );
-                                    final users s = new users();
-                                    s.email = (response.body().get(0).email.toString());
-                                    s.id = (response.body().get(0).id);
-                                    s.name = (response.body().get(0).name.toString());
-                                    s.password = (response.body().get(0).password.toString());
-                                    s.year = (response.body().get(0).year);
-                                    s.section = (response.body().get(0).section.toString());
-                                    s.department = (response.body().get(0).department.toString());
-                                    s.image = (response.body().get(0).image);
-                                    s.user_flage = (response.body().get(0).user_flage.toString());
-                                    s.remeber_token = (response.body().get(0).remeber_token);
-                                    s.user_token = (response.body().get(0).user_token);
-                                    Session.getInstance().loginUser(s);
+                                    users users=new users();
+                                    users=response.body().get(0);
+                                    Session.getInstance().loginUser(users);
                                     setNormalMode();
                                     Intent gotohome = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(gotohome);
@@ -131,14 +111,14 @@ public class LoginActivity extends AppCompatActivity {
 
                                 } else {
                                     setNormalMode();
-                                    Toast.makeText(LoginActivity.this, response.body().get(0).getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, response.body().get(0).message, Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<List<MainResponse>> call, Throwable t) {
+                        public void onFailure(Call<List<users>> call, Throwable t) {
                             setNormalMode();
                             Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }

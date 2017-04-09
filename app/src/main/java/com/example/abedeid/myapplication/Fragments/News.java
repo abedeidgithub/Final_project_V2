@@ -1,5 +1,6 @@
 package com.example.abedeid.myapplication.Fragments;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,10 @@ import android.widget.Toast;
 
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.adapters.Endless.EndlessRecyclerViewScrollListener;
+import com.example.abedeid.myapplication.adapters.NewsAdapter;
 import com.example.abedeid.myapplication.adapters.PostsAdapter;
 import com.example.abedeid.myapplication.model.Post;
+import com.example.abedeid.myapplication.model.news;
 import com.example.abedeid.myapplication.model.users;
 import com.example.abedeid.myapplication.utils.Session;
 import com.example.abedeid.myapplication.webservices.WebService;
@@ -27,52 +30,48 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostOrAsk extends Fragment {
+
+public class News extends Fragment {
+
     private int positionIndex;
     private int topView;
     private final String TAG = "PostOrAskTAG";
-    List<Post> postList;
-    private PostsAdapter adapter;
+    List<news> postList;
+    private NewsAdapter adapter;
     RecyclerView recycler_view;
     LinearLayoutManager linearLayoutManager;
-    users user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_post_or_ask, container, false);
-        recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view_posts);
+        View view =  inflater.inflate(R.layout.fragment_news, container, false);
+        recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view_news);
+
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-         if (Session.getInstance().getUser() != null) {
-            final users user=new users();
-            user.depart_id=Session.getInstance().getUser().depart_id;
-            user.section_id=Session.getInstance().getUser().section_id;
-            user.year_id=Session.getInstance().getUser().year_id;
-            user.Page=1;
+            final users s=new users();
+             s.Page=1;
             postList = new ArrayList<>();
             linearLayoutManager = new LinearLayoutManager(getContext());
             recycler_view.setLayoutManager(linearLayoutManager);
             recycler_view.setItemAnimator(new DefaultItemAnimator());
-            adapter=new PostsAdapter(postList,getContext());
+            adapter=new NewsAdapter(postList,getContext());
             recycler_view.setAdapter(adapter);
             recycler_view.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
                 @Override
                 public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                    user.Page=user.Page+1;
-                    getPostOfPages(user);
+                    s.Page++;
+                    getPostOfPages(s);
                 }
             });
-            getPostOfPages(user);
+            getPostOfPages(s);
 
-        } else {
-            Toast.makeText(getContext(), "error users is null  ", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
 
@@ -95,17 +94,16 @@ public class PostOrAsk extends Fragment {
     private void getPostOfPages(users s) {
 
 
-        WebService.getInstance().getApi().Posts(s).enqueue(new Callback<List<Post>>() {
+        WebService.getInstance().getApi().getnews(s).enqueue(new Callback<List<news>>() {
             @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                    for (byte i=0; i< response.body().size();i++)
-                        Log.d("Henadw...",response.body().get(0).name+"\n");
+            public void onResponse(Call<List<news>> call, Response<List<news>> response) {
+
                 postList.addAll(response.body());
                 adapter.notifyItemRangeInserted(adapter.getItemCount(),postList.size()-1);
             }
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
+            public void onFailure(Call<List<news>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }

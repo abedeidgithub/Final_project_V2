@@ -24,6 +24,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.model.users;
 import com.example.abedeid.myapplication.utils.Session;
+import com.example.abedeid.myapplication.webservices.Urls;
 import com.squareup.picasso.Picasso;
 
 
@@ -52,7 +53,7 @@ public class Profile extends Fragment {
 
             user_profile_name.setText( users.name);
             user_profile_email.setText(users.email.toString());
-            Glide.with(getContext()).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(user_profile_photo) {
+            Glide.with(getContext()).load(Urls.Local_images+users.image).asBitmap().centerCrop().into(new BitmapImageViewTarget(user_profile_photo) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =

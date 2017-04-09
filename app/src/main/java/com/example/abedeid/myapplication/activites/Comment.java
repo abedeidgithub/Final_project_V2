@@ -56,9 +56,9 @@ public class Comment extends Activity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Comment.this);
         recycler_view.setLayoutManager(linearLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
-        CommentModel post = new CommentModel();
-        post.ask_or_post_id = getIntent().getStringExtra("Post_ID");
-        getCommentsOfPages(post);
+        CommentModel Comment = new CommentModel();
+        Comment.post_id = getIntent().getStringExtra("Post_ID");
+        getCommentsOfPages(Comment);
         final users user = Session.getInstance().getUser();
        // DownloadFromUrl("http://fci-suze.esy.es/Webservices/uploads/FB_IMG_1457572882947.jpg","FB_IMG.jpg");
 
@@ -66,10 +66,9 @@ public class Comment extends Activity {
             @Override
             public void onClick(View view) {
                 CommentModel comment = new CommentModel();
-                comment.answer_or_comment_text = comment_txt.getText().toString();
-                comment.ask_or_post_id = getIntent().getStringExtra("Post_ID");
-                comment.user_id = user.id;
-                comment.type = "0";
+                comment.txt = comment_txt.getText().toString();
+                comment.post_id = getIntent().getStringExtra("Post_ID");
+//                comment.user_id = user.id;
                 WebService.getInstance().getApi().insert_Comment(comment).enqueue(new Callback<CommentModel>() {
                     @Override
                     public void onResponse(Call<CommentModel> call, Response<CommentModel> response) {
@@ -89,8 +88,8 @@ public class Comment extends Activity {
 
 
         Log.e("TAAAAAG", FirebaseInstanceId.getInstance().getToken());
-        FirebaseMessaging.getInstance().subscribeToTopic(post.ask_or_post_id);
-        Log.e("TAAAAAG",post.ask_or_post_id);
+        FirebaseMessaging.getInstance().subscribeToTopic(Comment.post_id);
+        Log.e("TAAAAAG",Comment.txt);
     }
 
 

@@ -21,6 +21,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.activites.Comment;
 import com.example.abedeid.myapplication.model.Post;
+import com.example.abedeid.myapplication.webservices.Urls;
 
 import java.util.List;
 
@@ -51,12 +52,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         final Post CurrentPost = postList.get(position);
-        holder.post_txt.setText(CurrentPost.ask_or_post_text);
-        holder.writer_post_name.setText( CurrentPost.id+" - "+CurrentPost.name);
-        holder.writer_post_time.setText(CurrentPost.created_at);
-        holder.comment_number.setText(CurrentPost.comments+" Comments");
-        if(CurrentPost.image!=null){
-            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
+        holder.post_txt.setText(CurrentPost.text);
+        holder.writer_post_name.setText( CurrentPost.name);
+        holder.writer_post_time.setText(CurrentPost.createdat);
+//        holder.comment_number.setText(CurrentPost.comments+" Comments");
+        if(CurrentPost.post_image!=null){
+            Glide.with(context).load(Urls.Local_images+CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
@@ -66,7 +67,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
                 }
             });
         }else {
-            Glide.with(context).load("http://fci-suze.esy.es/Webservices/uploads/Profile_img/profile.png").asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
+            Glide.with(context).load(Urls.Local_images+CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
                 @Override
                 protected void setResource(Bitmap resource) {
                     RoundedBitmapDrawable circularBitmapDrawable =
@@ -79,12 +80,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context, Comment.class);
-                intent.putExtra("Post_ID",CurrentPost.id);
+                intent.putExtra("Post_ID",CurrentPost.id_post);
                 context.startActivity(intent);
                 ((Activity) context).overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_left);
-
-
-
             }
         });
 

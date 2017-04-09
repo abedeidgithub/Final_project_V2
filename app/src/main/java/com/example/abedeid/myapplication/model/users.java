@@ -9,39 +9,48 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
 
 public class users extends RealmObject {
-
-
-    @SerializedName("id")
-    public String id;
+    @SerializedName("Page")
+    public  int Page;
+    @SerializedName("idstudent")
+    public String idstudent;
+    @SerializedName("year_id")
+    public int year_id;
+    @SerializedName("section_idsection")
+    public String section_idsection;
+    @SerializedName("year_name")
+    public String year_name;
+    @SerializedName("section_id")
+    public int section_id;
+    @SerializedName("section_name")
+    public String section_name;
+    @SerializedName("doctor_id")
+    public String doctor_id;
+    @SerializedName("person_id_person")
+    public String person_id_person;
+    @SerializedName("site")
+    public String site;
+    @SerializedName("about_doctor")
+    public String about_doctor;
+    @SerializedName("depart_id")
+    public int depart_id;
+    @SerializedName("dept_name")
+    public String dept_name;
+    @SerializedName("users_id")
+    public String users_id;
     @SerializedName("name")
     public String name;
-    @SerializedName("email")
-    public String email;
-    @SerializedName("user_flage")
-    public String user_flage;
-    @SerializedName("password")
-    public String password;
     @SerializedName("image")
     public String image;
-    @SerializedName("department")
-    public String department;
-    @SerializedName("section")
-    public String section;
-    @SerializedName("year")
-    public String year;
-    @SerializedName("remeber_token")
-    public String remeber_token;
-    @SerializedName("user_token")
-    public String user_token;
-    @SerializedName("created_at")
-    public String created_at;
-    @SerializedName("updated_at")
-    public String updated_at;
-    @SerializedName("user_site")
-    public String user_site;
+    @SerializedName("isAdmin")
+    public String isAdmin;
+    @SerializedName("email")
+    public String email;
+    @SerializedName("password")
+    public String password;
     @SerializedName("verify")
     public String verify;
-
-public  int Page;
-
+    @SerializedName("status")
+    public Boolean status;
+    @SerializedName("message")
+    public String message;
 }
