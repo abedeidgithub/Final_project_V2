@@ -52,8 +52,7 @@
                 android:gravity="center"
                 android:minWidth="60dp"
                 android:paddingRight="25dp"
-                android:text=" إذا ما طمحت الى غاية .. ركبت المنى ونسيت الحذر  "
-                 />
+                android:text=" إذا ما طمحت الى غاية .. ركبت المنى ونسيت الحذر  " />
 
         </FrameLayout>
 

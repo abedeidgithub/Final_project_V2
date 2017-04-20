@@ -67,10 +67,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-
+                <ImageView
+                    android:id="@+id/post_imge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <com.example.abedeid.myapplication.ReadMoreTextView
                     android:fontFamily="sans-serif-light"

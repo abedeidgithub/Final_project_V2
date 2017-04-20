@@ -1,6 +1,7 @@
 package com.example.abedeid.myapplication.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,8 +46,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
 
 
         Schedule schedule = scheduleList.get(position);
-        String to = (schedule.Schedule_to.substring(0, 5));
-        String from = (schedule.Schedule_from.substring(0, 5));
+        String to = (schedule.to_time.substring(0, 5));
+        String from = (schedule.from_time.substring(0, 5));
         int to_h = Integer.parseInt(to.substring(0, 2));
         int from_h = Integer.parseInt(from.substring(0, 2));
         int from_m = Integer.parseInt(from.substring(3, 5));
@@ -57,18 +58,24 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
         if (cHour >= from_h && cHour < to_h) {
 
             holder.time_now.setImageResource(R.drawable.ic_now);
+//                holder.schedule_card.setBackgroundColor(Color.parseColor("#0e7dff"));
 
         } else if (cHour == to_h) {
             if (cMinute <= to_m) {
                 holder.time_now.setImageResource(R.drawable.ic_now);
+//                holder.schedule_card.setBackgroundColor(Color.parseColor("#0e7dff"));
 
             } else {
+//                holder.schedule_card.setBackgroundColor(Color.parseColor("#cc181e"));
                 holder.time_now.setImageResource(R.drawable.ic_back);
+
 
             }
 
         }
         if (cHour > to_h) {
+//            holder.schedule_card.setBackgroundColor(Color.parseColor("#cc181e"));
+
             holder.time_now.setImageResource(R.drawable.ic_back);
 
         }
@@ -86,11 +93,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
         }
 
 
-        holder.doctor.setText(schedule.doctor.trim());
+        holder.doctor.setText(schedule.Doctor_name.trim());
         holder.to.setText(to.trim());
         holder.from.setText(from.trim());
         holder.place.setText(schedule.place.trim());
-        holder.subject.setText(schedule.subject.trim());
+        holder.subject.setText(schedule.subject_name.trim());
 
     }
 

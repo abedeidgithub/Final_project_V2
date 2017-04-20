@@ -32,18 +32,5 @@ public class CommentModel {
     @SerializedName("isAdmin")
     public int isAdmin;
 
-//    public static final Creator<CommentModel> CREATOR = new Creator<CommentModel>() {
-//        @Override
-//        public CommentModel createFromParcel(Parcel in) {
-//            return new CommentModel(in);
-//        }
-//
-//        @Override
-//        public CommentModel[] newArray(int size) {
-//            return new CommentModel[size];
-//        }
-//    };
-
-
 
 }

@@ -25,7 +25,7 @@ import butterknife.OnClick;
 
 
 public class CheckPasswordDialog extends DialogFragment {
-    @BindView(R.id.et_password_update)
+    @BindView(R.id.et_password)
     EditText etPassWord_upadte;
     @BindView(R.id.rllt_body)
     RelativeLayout rlltBody;

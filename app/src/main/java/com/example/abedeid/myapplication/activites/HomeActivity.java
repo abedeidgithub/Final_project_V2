@@ -24,10 +24,9 @@ public class HomeActivity extends AppCompatActivity {
      public TabLayout tabLayout;
     public ViewPager viewPager;
     public int[] tabIcons = {
-
-            R.drawable.ic_discount,
-            R.drawable.ic_food,
-            R.drawable.ic_travel,
+            R.drawable.profile,
+            R.drawable.post1,
+            R.drawable.news1,
             R.drawable.ic_discount,
             R.drawable.ic_food,
             R.drawable.ic_travel,
@@ -72,11 +71,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ScheduleFragment(), "Schedule");
         adapter.addFragment(new Profile(), "profile");
-        adapter.addFragment(new PostOrAsk(), "Poats");
-        adapter.addFragment(new News(), "ONE");
+        adapter.addFragment(new PostOrAsk(), "post");
+        adapter.addFragment(new News(), "news");
         adapter.addFragment(new ScheduleFragment(), "TWO");
+        adapter.addFragment(new ScheduleFragment(), "Schedule");
         adapter.addFragment(new ScheduleFragment(), "THREE");
         adapter.addFragment(new ScheduleFragment(), "ONE");
         adapter.addFragment(new ScheduleFragment(), "TWO");

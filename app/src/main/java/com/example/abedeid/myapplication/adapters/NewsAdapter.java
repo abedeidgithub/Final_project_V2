@@ -54,7 +54,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
         final news CurrentPost = postList.get(position);
         holder.post_txt.setText(CurrentPost.news_txt);
-        holder.writer_post_time.setText(CurrentPost.updatedat);
+//        holder.writer_post_time.setText(CurrentPost.updatedat);
         Glide.with(context).load(Urls.Local_images+CurrentPost.news_img).into(holder.image_post) ;
 
 
@@ -73,7 +73,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            writer_post_time = (TextView) itemView.findViewById(R.id.news_time);
+//            writer_post_time = (TextView) itemView.findViewById(R.id.news_time);
             post_txt = (TextView) itemView.findViewById(R.id.news_txt);
             image_post = (ImageView) itemView.findViewById(R.id.image_news);
 

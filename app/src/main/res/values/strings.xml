@@ -3,7 +3,9 @@
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
+    <string name="read_more">show more</string>
 
+    <string name="read_less">show less</string>
     <string name="slide_1_title">جامعه قناه السويس </string>
     <string name="slide_1_desc">تسعي جامعه قناه السويس يالطوير بالتعليم في كل المجالات </string>
 

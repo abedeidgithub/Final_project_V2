@@ -17,6 +17,7 @@ import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.adapters.CommentAdapter;
 import com.example.abedeid.myapplication.fcm.FirebaseService;
 import com.example.abedeid.myapplication.model.CommentModel;
+import com.example.abedeid.myapplication.model.MainResponse;
 import com.example.abedeid.myapplication.model.users;
 import com.example.abedeid.myapplication.utils.Session;
 import com.example.abedeid.myapplication.webservices.WebService;
@@ -58,38 +59,40 @@ public class Comment extends Activity {
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         CommentModel Comment = new CommentModel();
         Comment.post_id = getIntent().getStringExtra("Post_ID");
-        getCommentsOfPages(Comment);
+         getCommentsOfPages(Comment);
         final users user = Session.getInstance().getUser();
        // DownloadFromUrl("http://fci-suze.esy.es/Webservices/uploads/FB_IMG_1457572882947.jpg","FB_IMG.jpg");
 
-        insertComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CommentModel comment = new CommentModel();
-                comment.txt = comment_txt.getText().toString();
-                comment.post_id = getIntent().getStringExtra("Post_ID");
-//                comment.user_id = user.id;
-                WebService.getInstance().getApi().insert_Comment(comment).enqueue(new Callback<CommentModel>() {
-                    @Override
-                    public void onResponse(Call<CommentModel> call, Response<CommentModel> response) {
-                        finish();
-                        startActivity(getIntent());
-                    }
+//        insertComment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                CommentModel comment = new CommentModel();
+//                comment.txt = comment_txt.getText().toString();
+//                comment.post_id = getIntent().getStringExtra("Post_ID");
+//                comment.user_id = Integer.parseInt(user.users_id);
+//                WebService.getInstance().getApi().insert_Comment(comment).enqueue(new Callback<MainResponse>() {
+//                    @Override
+//                    public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+//                        finish();
+//                        startActivity(getIntent());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<MainResponse> call, Throwable t) {
+//                        Toast.makeText(Comment.this, "Error", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//            }
+//        });
 
-                    @Override
-                    public void onFailure(Call<CommentModel> call, Throwable t) {
-                        Toast.makeText(Comment.this, "Error", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-        });
 
 
 
-        Log.e("TAAAAAG", FirebaseInstanceId.getInstance().getToken());
-        FirebaseMessaging.getInstance().subscribeToTopic(Comment.post_id);
-        Log.e("TAAAAAG",Comment.txt);
+
+//        Log.e("TAAAAAG", FirebaseInstanceId.getInstance().getToken());
+//        FirebaseMessaging.getInstance().subscribeToTopic(Comment.post_id);
+//        Log.e("TAAAAAG",Comment.txt);
     }
 
 
@@ -157,7 +160,7 @@ public class Comment extends Activity {
     }
 
     private void getCommentsOfPages(CommentModel post) {
-        WebService.getInstance().getApi().comments(post).enqueue(new Callback<List<CommentModel>>() {
+        WebService.getInstance().getApi().getComments(post).enqueue(new Callback<List<CommentModel>>() {
             @Override
             public void onResponse(Call<List<CommentModel>> call, Response<List<CommentModel>> response) {
                 List<CommentModel> commentModels = response.body();
@@ -169,7 +172,7 @@ public class Comment extends Activity {
 
             @Override
             public void onFailure(Call<List<CommentModel>> call, Throwable t) {
-                Toast.makeText(Comment.this, "error users is null  ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Comment.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
