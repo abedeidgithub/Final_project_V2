@@ -19,11 +19,16 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.Fragments.News;
 import com.example.abedeid.myapplication.R;
+import com.example.abedeid.myapplication.ReadMoreTextView;
 import com.example.abedeid.myapplication.activites.Comment;
 import com.example.abedeid.myapplication.model.Post;
 import com.example.abedeid.myapplication.model.news;
 import com.example.abedeid.myapplication.webservices.Urls;
+import com.github.curioustechizen.ago.RelativeTimeTextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,7 +59,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
         final news CurrentPost = postList.get(position);
         holder.post_txt.setText(CurrentPost.news_txt);
-//        holder.writer_post_time.setText(CurrentPost.updatedat);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(CurrentPost.updatedat);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        holder.writer_post_time.setReferenceTime(convertedDate.getTime());
+
         Glide.with(context).load(Urls.Local_images+CurrentPost.news_img).into(holder.image_post) ;
 
 
@@ -68,13 +83,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView writer_post_time, post_txt;
+        RelativeTimeTextView  writer_post_time;
+          ReadMoreTextView post_txt;
         ImageView image_post;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-//            writer_post_time = (TextView) itemView.findViewById(R.id.news_time);
-            post_txt = (TextView) itemView.findViewById(R.id.news_txt);
+            writer_post_time = (RelativeTimeTextView ) itemView.findViewById(R.id.news_time);
+            post_txt = (ReadMoreTextView) itemView.findViewById(R.id.news_txt);
             image_post = (ImageView) itemView.findViewById(R.id.image_news);
 
         }

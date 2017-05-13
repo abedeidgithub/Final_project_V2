@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,6 +94,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
         }
 
 
+//        holder.doctor.setText(Html.fromHtml(("<h1 style=\"color :red ;\">"+schedule.Doctor_name.trim()+"</h1>")));
         holder.doctor.setText(schedule.Doctor_name.trim());
         holder.to.setText(to.trim());
         holder.from.setText(from.trim());

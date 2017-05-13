@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.R;
+import com.example.abedeid.myapplication.ReadMoreTextView;
 import com.example.abedeid.myapplication.activites.Comment;
 import com.example.abedeid.myapplication.model.CommentType;
 import com.example.abedeid.myapplication.model.Post;
@@ -61,10 +62,12 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
         Post post = postList.get(position);
-        if (post.post_image.isEmpty()  ) {
+//        Log.d("TAGES",post.post_image.toString()+"");
+//        Log.d("TAGES",post.post_image+"dfff");
+        if (post.post_image.isEmpty()) {
             Log.d("TAGES",post.post_image);
             return CommentType.SENT_TXT;
-        } else if (!post.post_image.isEmpty()  ) {
+        } else if (!post.post_image.isEmpty()) {
             Log.d("TAGES",post.post_image);
             return CommentType.SENT_IMAGE;
         }
@@ -82,27 +85,27 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             holder.writer_post_name.setText(CurrentPost.name);
             holder.writer_post_time.setText((CurrentPost.createdat));
 //        holder.comment_number.setText(CurrentPost.comments+" Comments");
-            if (! CurrentPost.post_image.isEmpty()) {
-                Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
-                    @Override
-                    protected void setResource(Bitmap resource) {
-                        RoundedBitmapDrawable circularBitmapDrawable =
-                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                        circularBitmapDrawable.setCircular(true);
-                        holder.image_post.setImageDrawable(circularBitmapDrawable);
-                    }
-                });
-            } else {
-                Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
-                    @Override
-                    protected void setResource(Bitmap resource) {
-                        RoundedBitmapDrawable circularBitmapDrawable =
-                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
-                        circularBitmapDrawable.setCircular(true);
-                        holder.image_post.setImageDrawable(circularBitmapDrawable);
-                    }
-                });
-            }
+//            if (! CurrentPost.post_image.isEmpty()) {
+//                Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
+//                    @Override
+//                    protected void setResource(Bitmap resource) {
+//                        RoundedBitmapDrawable circularBitmapDrawable =
+//                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+//                        circularBitmapDrawable.setCircular(true);
+//                        holder.image_post.setImageDrawable(circularBitmapDrawable);
+//                    }
+//                });
+//            } else {
+//                Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
+//                    @Override
+//                    protected void setResource(Bitmap resource) {
+//                        RoundedBitmapDrawable circularBitmapDrawable =
+//                                RoundedBitmapDrawableFactory.create(context.getResources(), resource);
+//                        circularBitmapDrawable.setCircular(true);
+//                        holder.image_post.setImageDrawable(circularBitmapDrawable);
+//                    }
+//                });
+//            }
             holder.comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -160,7 +163,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
             Glide.with(context)
-                    .load(Urls.Local_images + "/profile.png")
+                    .load(Urls.Local_images + CurrentPost.post_image)
                     .into(holder.post_imge);
 
         }
@@ -174,7 +177,8 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView writer_post_name, writer_post_time, post_txt, comment_number;
+        TextView writer_post_name, writer_post_time, comment_number;
+        ReadMoreTextView post_txt;
         ImageView image_post;
         CardView post_card;
         LinearLayout comment;
@@ -183,7 +187,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             writer_post_name = (TextView) itemView.findViewById(R.id.writer_post_name);
             writer_post_time = (TextView) itemView.findViewById(R.id.writer_post_time);
-            post_txt = (TextView) itemView.findViewById(R.id.post_txt);
+            post_txt = (ReadMoreTextView) itemView.findViewById(R.id.post_txt);
             comment_number = (TextView) itemView.findViewById(R.id.comment_number);
             image_post = (ImageView) itemView.findViewById(R.id.image_post);
             post_card = (CardView) itemView.findViewById(R.id.post_card);
@@ -193,7 +197,8 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public class MyViewImageHolder extends RecyclerView.ViewHolder {
-        TextView writer_post_name, writer_post_time, post_txt, comment_number;
+        TextView writer_post_name, writer_post_time, comment_number;
+        ReadMoreTextView post_txt;
         ImageView image_post, post_imge;
         CardView post_card;
         LinearLayout comment;
@@ -202,7 +207,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             writer_post_name = (TextView) itemView.findViewById(R.id.writer_post_name);
             writer_post_time = (TextView) itemView.findViewById(R.id.writer_post_time);
-            post_txt = (TextView) itemView.findViewById(R.id.post_txt);
+            post_txt = (ReadMoreTextView) itemView.findViewById(R.id.post_txt);
             comment_number = (TextView) itemView.findViewById(R.id.comment_number);
             image_post = (ImageView) itemView.findViewById(R.id.image_post);
             post_imge = (ImageView) itemView.findViewById(R.id.post_imge);

@@ -9,11 +9,13 @@ import com.google.gson.annotations.SerializedName;
 public class schedule_par {
 
     @SerializedName("year_id")
-    public int year_id;
+    public String year_id;
+    @SerializedName("doctor_id")
+    public String doctor_id;
     @SerializedName("section_id")
-    public int section_id;
+    public String section_id;
     @SerializedName("depart_id")
-    public int depart_id;
+    public String depart_id;
     @SerializedName("day_id")
-    public int day_id;
+    public String  day_id;
 }

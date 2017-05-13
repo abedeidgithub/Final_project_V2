@@ -65,7 +65,8 @@ public class ScheduleFragment extends Fragment {
             schedule_par.year_id=user.year_id;
             schedule_par.depart_id=user.depart_id;
             schedule_par.section_id=user.section_id;
-            schedule_par.day_id=2;
+            schedule_par.day_id="2";  // day <-------
+            schedule_par.doctor_id=user.doctor_id;
             WebService.getInstance().getApi().getSchedule(schedule_par).enqueue(new Callback<List<Schedule>>() {
                 @Override
                 public void onResponse(Call<List<Schedule>> call, Response<List<Schedule>> response) {
