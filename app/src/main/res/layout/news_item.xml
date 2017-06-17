@@ -62,8 +62,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
-                <com.example.abedeid.myapplication.ReadMoreTextView
-                    android:id="@+id/news_txt"
+                <com.example.abedeid.myapplication.ExpandableTextView                    android:id="@+id/news_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
@@ -73,10 +72,7 @@
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:colorClickableText="@android:color/holo_blue_light"
-                    app:trimCollapsedText="@string/read_more"
-                    app:trimExpandedText="@string/read_less"
-                    app:trimLength="4"
-                    app:trimMode="trimModeLine" />
+                       />
 
 
             </LinearLayout>

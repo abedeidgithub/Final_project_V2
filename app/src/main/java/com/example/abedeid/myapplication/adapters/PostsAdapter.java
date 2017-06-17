@@ -18,8 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.example.abedeid.myapplication.ExpandableTextView;
 import com.example.abedeid.myapplication.R;
-import com.example.abedeid.myapplication.ReadMoreTextView;
 import com.example.abedeid.myapplication.activites.Comment;
 import com.example.abedeid.myapplication.model.CommentType;
 import com.example.abedeid.myapplication.model.Post;
@@ -84,7 +84,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             holder.post_txt.setText(CurrentPost.text);
             holder.writer_post_name.setText(CurrentPost.name);
             holder.writer_post_time.setText((CurrentPost.createdat));
-//        holder.comment_number.setText(CurrentPost.comments+" Comments");
+        holder.comment_number.setText(CurrentPost.comments+" Comments");
 //            if (! CurrentPost.post_image.isEmpty()) {
 //                Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
 //                    @Override
@@ -129,7 +129,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             holder.post_txt.setText(CurrentPost.text);
             holder.writer_post_name.setText(CurrentPost.name);
             holder.writer_post_time.setText((CurrentPost.createdat));
-//        holder.comment_number.setText(CurrentPost.comments+" Comments");
+        holder.comment_number.setText(CurrentPost.comments+" Comments");
             if (!CurrentPost.post_image.isEmpty()) {
                 Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
                     @Override
@@ -178,7 +178,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView writer_post_name, writer_post_time, comment_number;
-        ReadMoreTextView post_txt;
+        ExpandableTextView post_txt;
         ImageView image_post;
         CardView post_card;
         LinearLayout comment;
@@ -187,7 +187,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             writer_post_name = (TextView) itemView.findViewById(R.id.writer_post_name);
             writer_post_time = (TextView) itemView.findViewById(R.id.writer_post_time);
-            post_txt = (ReadMoreTextView) itemView.findViewById(R.id.post_txt);
+            post_txt = (ExpandableTextView) itemView.findViewById(R.id.post_txt);
             comment_number = (TextView) itemView.findViewById(R.id.comment_number);
             image_post = (ImageView) itemView.findViewById(R.id.image_post);
             post_card = (CardView) itemView.findViewById(R.id.post_card);
@@ -198,7 +198,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class MyViewImageHolder extends RecyclerView.ViewHolder {
         TextView writer_post_name, writer_post_time, comment_number;
-        ReadMoreTextView post_txt;
+ ExpandableTextView post_txt;
         ImageView image_post, post_imge;
         CardView post_card;
         LinearLayout comment;
@@ -207,7 +207,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             writer_post_name = (TextView) itemView.findViewById(R.id.writer_post_name);
             writer_post_time = (TextView) itemView.findViewById(R.id.writer_post_time);
-            post_txt = (ReadMoreTextView) itemView.findViewById(R.id.post_txt);
+            post_txt = (ExpandableTextView) itemView.findViewById(R.id.post_txt);
             comment_number = (TextView) itemView.findViewById(R.id.comment_number);
             image_post = (ImageView) itemView.findViewById(R.id.image_post);
             post_imge = (ImageView) itemView.findViewById(R.id.post_imge);

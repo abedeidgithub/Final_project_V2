@@ -1,27 +1,16 @@
 package com.example.abedeid.myapplication.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.example.abedeid.myapplication.Fragments.News;
+import com.example.abedeid.myapplication.ExpandableTextView;
 import com.example.abedeid.myapplication.R;
-import com.example.abedeid.myapplication.ReadMoreTextView;
-import com.example.abedeid.myapplication.activites.Comment;
-import com.example.abedeid.myapplication.model.Post;
 import com.example.abedeid.myapplication.model.news;
 import com.example.abedeid.myapplication.webservices.Urls;
 import com.github.curioustechizen.ago.RelativeTimeTextView;
@@ -84,13 +73,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         RelativeTimeTextView  writer_post_time;
-          ReadMoreTextView post_txt;
+        ExpandableTextView post_txt;
         ImageView image_post;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             writer_post_time = (RelativeTimeTextView ) itemView.findViewById(R.id.news_time);
-            post_txt = (ReadMoreTextView) itemView.findViewById(R.id.news_txt);
+            post_txt = (ExpandableTextView) itemView.findViewById(R.id.news_txt);
             image_post = (ImageView) itemView.findViewById(R.id.image_news);
 
         }

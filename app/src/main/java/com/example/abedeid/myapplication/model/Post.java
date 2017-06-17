@@ -32,4 +32,6 @@ public class Post {
     public String users_id;
     @SerializedName("isAdmin")
     public String isAdmin;
+    @SerializedName("comments")
+    public String comments;
 }
