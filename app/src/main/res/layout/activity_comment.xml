@@ -29,31 +29,36 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+             android:id="@+id/imageView2"
+            android:layout_width="@dimen/_48sdp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
             android:background="@color/white"
-            android:src="@drawable/ic_attachme" />
+            android:src="@drawable/image" />
 
 
         <EditText
-            android:hint="@string/comment"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:id="@+id/comment_txt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
             android:gravity="top|left"
+            android:hint="@string/comment"
             android:inputType="textMultiLine"
             android:scrollbars="vertical" />
 
         <ImageButton
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:id="@+id/insertComment"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:background="@color/white"
-            android:src="@drawable/ic_pencile" />
+            android:src="@drawable/arrow" />
     </LinearLayout>
 
 </LinearLayout>

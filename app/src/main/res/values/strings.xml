@@ -72,6 +72,7 @@
     <string name="camera">camera</string>
     <string name="select_picture">select_image</string>
     <string name="comment">Your Comment Here</string>
+    <string name="title_activity_write__post_">Write_Post_Activity</string>
 
 
 </resources>

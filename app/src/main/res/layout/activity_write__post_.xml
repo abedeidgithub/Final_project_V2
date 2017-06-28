@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp"
+    tools:context="com.example.abedeid.myapplication.activites.Write_Post_Activity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_16sdp"
+            tools:context="com.example.abedeid.myapplication.activites.Write_Post_Activity">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                     android:id="@+id/post_w_i"
+                    android:layout_width="150px"
+                    android:layout_height="150px" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/post_w_n"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/post_w_t"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/customborder"
+                android:gravity="top|left"
+                android:hint="What's on your mind?"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#111" />
+
+            <TextView
+                android:id="@+id/addimage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@android:drawable/ic_menu_camera"
+                android:text="    Photo"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:id="@+id/Upload_image"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_4sdp"
+                 android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/pdialog"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="false" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#111" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <Spinner
+                    android:id="@+id/post_yaer"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_spinner_background"
+                    android:spinnerMode="dropdown" />
+
+                <Spinner
+                    android:id="@+id/post_section"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_spinner_background"
+                    android:spinnerMode="dropdown" />
+
+                <Spinner
+                    android:id="@+id/post_department"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_spinner_background"
+                    android:spinnerMode="dropdown" />
+
+            </LinearLayout>
+
+            <Button
+
+                android:id="@+id/btn_w_post"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_12sdp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btn_post"
+                android:paddingEnd="40dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:paddingStart="40dp"
+                android:text="Post Now "
+                android:textColor="#fff" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

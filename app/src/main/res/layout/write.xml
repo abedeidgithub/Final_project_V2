@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/write_post_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     >
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:paddingBottom="5dp"
+            android:paddingRight="50dp"
+            android:paddingTop="10dp"
+            android:text="       Write Post "
+            android:textSize="25dp"
+            android:textStyle="bold|italic" />
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

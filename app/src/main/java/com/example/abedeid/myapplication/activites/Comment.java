@@ -1,7 +1,13 @@
 package com.example.abedeid.myapplication.activites;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -17,7 +24,9 @@ import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.adapters.CommentAdapter;
 import com.example.abedeid.myapplication.fcm.FirebaseService;
 import com.example.abedeid.myapplication.model.CommentModel;
+import com.example.abedeid.myapplication.model.CommentUpload;
 import com.example.abedeid.myapplication.model.MainResponse;
+import com.example.abedeid.myapplication.model.Section;
 import com.example.abedeid.myapplication.model.users;
 import com.example.abedeid.myapplication.utils.Session;
 import com.example.abedeid.myapplication.webservices.WebService;
@@ -34,123 +43,153 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Comment extends Activity {
 
+    ProgressDialog progressDialog;
     private CommentAdapter adapter;
     RecyclerView recycler_view;
     EditText comment_txt;
     ImageButton insertComment;
     List<CommentModel> commentModels;
-
+    ImageView Upload_image;
+    int i=0;
+    File file;
+    String mediaPath;
+    String[] mediaColumns = { MediaStore.Video.Media._ID };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        CommentModel Comment = new CommentModel();
+        Comment.post_id = getIntent().getStringExtra("Post_ID");
+        FirebaseMessaging.getInstance().subscribeToTopic(Session.getInstance().getUser().users_id+Comment.post_id);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view_comments);
         insertComment = (ImageButton) findViewById(R.id.insertComment);
         comment_txt = (EditText) findViewById(R.id.comment_txt);
+        Upload_image=(ImageView)findViewById(R.id.imageView2);
+        Upload_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, 0);
 
+                i=1;
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Comment.this);
         recycler_view.setLayoutManager(linearLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
-        CommentModel Comment = new CommentModel();
-        Comment.post_id = getIntent().getStringExtra("Post_ID");
+
+        Toast.makeText(this, Comment.post_id, Toast.LENGTH_SHORT).show();
          getCommentsOfPages(Comment);
         final users user = Session.getInstance().getUser();
-       // DownloadFromUrl("http://fci-suze.esy.es/Webservices/uploads/FB_IMG_1457572882947.jpg","FB_IMG.jpg");
-
-//        insertComment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                CommentModel comment = new CommentModel();
-//                comment.txt = comment_txt.getText().toString();
-//                comment.post_id = getIntent().getStringExtra("Post_ID");
-//                comment.user_id = Integer.parseInt(user.users_id);
-//                WebService.getInstance().getApi().insert_Comment(comment).enqueue(new Callback<MainResponse>() {
-//                    @Override
-//                    public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-//                        finish();
-//                        startActivity(getIntent());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<MainResponse> call, Throwable t) {
-//                        Toast.makeText(Comment.this, "Error", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//            }
-//        });
 
 
+        insertComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CommentUpload comment = new CommentUpload();
+                comment.txt = comment_txt.getText().toString();
+                comment.post_id = getIntent().getStringExtra("Post_ID");
+                comment.user_id = Integer.parseInt(user.users_id);
+                if(i==1) {
+                    uploadFile();
+                    comment.image=file.getName();
+                }
+                WebService.getInstance().getApi().insert_Comment(comment).enqueue(new Callback<MainResponse>() {
+                    @Override
+                    public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                        finish();
+                        startActivity(getIntent());
+                    }
 
+                    @Override
+                    public void onFailure(Call<MainResponse> call, Throwable t) {
+                        Toast.makeText(Comment.this, "Error", Toast.LENGTH_SHORT).show();
 
+                    }
+                });
+            }
+        });
 
-//        Log.e("TAAAAAG", FirebaseInstanceId.getInstance().getToken());
-//        FirebaseMessaging.getInstance().subscribeToTopic(Comment.post_id);
-//        Log.e("TAAAAAG",Comment.txt);
     }
 
 
-
-
-
-    ///
-
-    public void DownloadFromUrl(String DownloadUrl, String fileName) {
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         try {
-            File root = android.os.Environment.getExternalStorageDirectory();
+            // When an Image is picked
+            if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
 
-            File dir = new File (root.getAbsolutePath() + "/xmls");
-            if(dir.exists()==false) {
-                dir.mkdirs();
+                // Get the Image from data
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                assert cursor != null;
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                mediaPath = cursor.getString(columnIndex);
+                Upload_image.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
+                cursor.close();
+
+            } else {
+                Toast.makeText(this, "You haven't picked Image/Video", Toast.LENGTH_LONG).show();
             }
-
-            URL url = new URL(DownloadUrl); //you can write here any link
-            File file = new File(dir, fileName);
-
-            long startTime = System.currentTimeMillis();
-            Log.d("DownloadManager", "download begining");
-            Log.d("DownloadManager", "download url:" + url);
-            Log.d("DownloadManager", "downloaded file name:" + fileName);
-
-           /* Open a connection to that URL. */
-            URLConnection ucon = url.openConnection();
-
-
-            InputStream is = ucon.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            FileOutputStream fos = new FileOutputStream(file);
-
-            int current = 0;
-            while ((current = bis.read()) != -1) {
-                fos.write(current);
-            }
-
-            fos.close();
-            Log.d("DownloadManager", "download ready in" + ((System.currentTimeMillis() - startTime) / 1000) + " sec");
-
-        } catch (IOException e) {
-            Log.d("DownloadManager", "Error: " + e);
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
 
     }
 
+    private void uploadFile() {
 
 
 
+        file = new File(mediaPath);
+
+        // Parsing any Media type file
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+        WebService.getInstance().getApi().uploadFile(fileToUpload, filename).
+                enqueue(new Callback<MainResponse>() {
+                    @Override
+                    public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                        MainResponse serverResponse = response.body();
+                        if (serverResponse != null) {
+                            if (serverResponse.getStatus()) {
+                                Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            assert serverResponse != null;
+                            Log.v("Response", serverResponse.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MainResponse> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getBaseContext(), "error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
 
 
-
-
-
-    //
     @Override
     public void onBackPressed() {
         super.onBackPressed();

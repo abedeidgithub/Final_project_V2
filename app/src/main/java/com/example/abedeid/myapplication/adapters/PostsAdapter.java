@@ -15,12 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.abedeid.myapplication.ExpandableTextView;
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.activites.Comment;
+import com.example.abedeid.myapplication.activites.Write_Post_Activity;
 import com.example.abedeid.myapplication.model.CommentType;
 import com.example.abedeid.myapplication.model.Post;
 import com.example.abedeid.myapplication.webservices.Urls;
@@ -37,6 +41,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     Context context;
 
     public PostsAdapter(List<Post> postList, Context context) {
+        postList.add(null);
         this.postList = postList;
         this.context = context;
     }
@@ -48,12 +53,15 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_ask_item, parent, false));
 
-        } else if(viewType == CommentType.SENT_IMAGE) {
+        } else if (viewType == CommentType.SENT_IMAGE) {
             return new MyViewImageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_ask_item_img, parent, false));
 
 
+        } else {
+
+            return new Write_post(LayoutInflater.from(parent.getContext()).inflate(R.layout.write, parent, false));
         }
-       return null;
+
 
     }
 
@@ -62,13 +70,15 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
         Post post = postList.get(position);
-//        Log.d("TAGES",post.post_image.toString()+"");
-//        Log.d("TAGES",post.post_image+"dfff");
+        Log.d("AAbedEEid", position + "   ->" + postList.size());
+        if (position == 0) {
+            return 10;
+        }
         if (post.post_image.isEmpty()) {
-            Log.d("TAGES",post.post_image);
+            Log.d("TAGES", post.post_image);
             return CommentType.SENT_TXT;
         } else if (!post.post_image.isEmpty()) {
-            Log.d("TAGES",post.post_image);
+            Log.d("TAGES", post.post_image);
             return CommentType.SENT_IMAGE;
         }
         return super.getItemViewType(position);
@@ -84,7 +94,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             holder.post_txt.setText(CurrentPost.text);
             holder.writer_post_name.setText(CurrentPost.name);
             holder.writer_post_time.setText((CurrentPost.createdat));
-        holder.comment_number.setText(CurrentPost.comments+" Comments");
+            holder.comment_number.setText(CurrentPost.comments + " Comments");
 //            if (! CurrentPost.post_image.isEmpty()) {
 //                Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
 //                    @Override
@@ -122,14 +132,14 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 .into(holder.post_imge);
 */
 
-        } else if(type == CommentType.SENT_IMAGE){
+        } else if (type == CommentType.SENT_IMAGE) {
 
             final PostsAdapter.MyViewImageHolder holder = (PostsAdapter.MyViewImageHolder) mholder;
 
             holder.post_txt.setText(CurrentPost.text);
             holder.writer_post_name.setText(CurrentPost.name);
             holder.writer_post_time.setText((CurrentPost.createdat));
-        holder.comment_number.setText(CurrentPost.comments+" Comments");
+            holder.comment_number.setText(CurrentPost.comments + " Comments");
             if (!CurrentPost.post_image.isEmpty()) {
                 Glide.with(context).load(Urls.Local_images + CurrentPost.user_image).asBitmap().centerCrop().into(new BitmapImageViewTarget(holder.image_post) {
                     @Override
@@ -166,6 +176,17 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .load(Urls.Local_images + CurrentPost.post_image)
                     .into(holder.post_imge);
 
+        } else {
+            final PostsAdapter.Write_post holder = (PostsAdapter.Write_post) mholder;
+            holder.write_post.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, Write_Post_Activity.class);
+                    (context).startActivity(intent);
+                }
+            });
+
+
         }
     }
 
@@ -196,9 +217,18 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public class Write_post extends RecyclerView.ViewHolder {
+        RelativeLayout write_post;
+
+        public Write_post(View itemView) {
+            super(itemView);
+            write_post = (RelativeLayout) itemView.findViewById(R.id.write_post_card);
+        }
+    }
+
     public class MyViewImageHolder extends RecyclerView.ViewHolder {
         TextView writer_post_name, writer_post_time, comment_number;
- ExpandableTextView post_txt;
+        ExpandableTextView post_txt;
         ImageView image_post, post_imge;
         CardView post_card;
         LinearLayout comment;

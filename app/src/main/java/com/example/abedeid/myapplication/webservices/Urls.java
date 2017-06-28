@@ -5,8 +5,5 @@ package com.example.abedeid.myapplication.webservices;
  */
 public class Urls {
     public static final String Local_URL="http://192.168.1.6/graduation/";
-//    public static final String Local_URL="http://192.168.43.98/graduation/";
-//    public static final String Local_images="http://192.168.43.98/graduation/images/";
     public static final String Local_images="http://192.168.1.6/graduation/images/";
-    public static final String WEB_URL="http://fci-suze.esy.es/Webservices/";
 }

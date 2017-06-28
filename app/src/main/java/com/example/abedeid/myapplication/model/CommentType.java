@@ -10,7 +10,8 @@ public class CommentType {
     public static final int SENT_IMAGE=2;
     public static final int RECEIVE_TXT=3;
     public static final int RECIVE_IMAGE=4;
-
+    public static final int RECEIVE_TXT_IMAGE=5;
+    public static final int SENNT_TXT_IMAGE=6;
 
 
 }

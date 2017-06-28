@@ -12,9 +12,11 @@
         android:orientation="vertical">
 
         <ImageView
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
-            android:src="@drawable/ic_discount"
+            android:src="@drawable/logo"
             android:id="@+id/imageView" />
 
         <TextView

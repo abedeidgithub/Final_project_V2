@@ -1,9 +1,7 @@
 package com.example.abedeid.myapplication.Fragments;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -50,16 +48,6 @@ public class PostOrAsk extends Fragment {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = (getActivity()).getFragmentManager();
-                write_post dFragment = new write_post();
-                dFragment.show(fm, "Ddddddd");
-
-            }
-        });
         recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view_posts);
 
         return view;
@@ -95,7 +83,8 @@ public class PostOrAsk extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                Toast.makeText(getContext(), "Fffffff", Toast.LENGTH_SHORT).show();
+                user.Page = 1;
                 getPostOfPages_ref(user);
 
             }
@@ -120,7 +109,7 @@ public class PostOrAsk extends Fragment {
     }
 
     private void getPostOfPages(users s) {
-        Log.d("Dddd", s.name +"  "+s.depart_id +" "+s.section_id+"  "+s.year_id);
+        Log.d("Dddd", s.name + "  " + s.depart_id + " " + s.section_id + "  " + s.year_id);
         WebService.getInstance().getApi().Posts(s).enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {

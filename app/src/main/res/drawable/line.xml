@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="line">
 
+        <!--android:color="@color/bd" />-->
     <stroke
         android:width="2dp"
-        android:color="@color/bd" />
-
+    android:color="#FFF"
+    />
     <size android:height="10dp" />
 
 </shape>

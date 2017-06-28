@@ -23,6 +23,7 @@ import com.example.abedeid.myapplication.activites.HomeActivity;
 import com.example.abedeid.myapplication.adapters.PostsAdapter;
 import com.example.abedeid.myapplication.model.MainResponse;
 import com.example.abedeid.myapplication.model.Post;
+import com.example.abedeid.myapplication.model.PostResponse;
 import com.example.abedeid.myapplication.utils.Session;
 import com.example.abedeid.myapplication.webservices.WebService;
 
@@ -76,34 +77,34 @@ public class write_post extends DialogFragment {
         post.year_id="1";
         post.user_image="immg";
 
-        WebService.getInstance().getApi().insert_Post(post).enqueue(new Callback<MainResponse>() {
-            @Override
-            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-                if(response.body().getStatus()==true){
-                    setNormalMode();
-                    Toast.makeText(getActivity(), "posted", Toast.LENGTH_SHORT).show();
-//                     Intent intent=new Intent();
-//                    startActivityForResult(intent,2);
-                    Intent i = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(i);
-                     getDialog().dismiss();
-
-
-
-
-                }else{
-                   setNormalMode();
-                    Toast.makeText(getActivity(), "error "+ response.body().getStatus(), Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(getActivity(), "error "+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MainResponse> call, Throwable t) {
-                setNormalMode();
-                Toast.makeText(getActivity(), "error "+ t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        WebService.getInstance().getApi().insert_Post(post).enqueue(new Callback<PostResponse>() {
+//            @Override
+//            public void onResponse(Call<PostResponse> call, Response<MainResponse> response) {
+//                if(response.body().getStatus()==true){
+//                    setNormalMode();
+//                    Toast.makeText(getActivity(), "posted", Toast.LENGTH_SHORT).show();
+////                     Intent intent=new Intent();
+////                    startActivityForResult(intent,2);
+//                    Intent i = new Intent(getActivity(), HomeActivity.class);
+//                    startActivity(i);
+//                     getDialog().dismiss();
+//
+//
+//
+//
+//                }else{
+//                   setNormalMode();
+//                    Toast.makeText(getActivity(), "error "+ response.body().getStatus(), Toast.LENGTH_SHORT).show();
+////                    Toast.makeText(getActivity(), "error "+ response.body().getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MainResponse> call, Throwable t) {
+//                setNormalMode();
+//                Toast.makeText(getActivity(), "error "+ t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
