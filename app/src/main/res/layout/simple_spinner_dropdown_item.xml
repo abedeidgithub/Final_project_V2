@@ -5,10 +5,10 @@
     android:layout_alignParentRight="true"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
-    android:layout_margin="48dp"
+    android:layout_margin="@dimen/_48sdp"
     android:checkMark="?android:attr/listChoiceIndicatorMultiple"
     android:checked="true"
     android:text="CheckedTextView"
-    android:textSize="20dp"
+    android:textSize="@dimen/_20sdp"
     android:layout_centerHorizontal="true"
     xmlns:android="http://schemas.android.com/apk/res/android" />

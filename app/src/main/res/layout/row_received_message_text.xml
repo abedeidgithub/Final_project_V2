@@ -15,7 +15,7 @@
 
 
         <LinearLayout
-            android:padding="2dp"
+            android:padding="@dimen/_2sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -25,8 +25,8 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:id="@+id/img_profile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:src="@drawable/bg" />
 
             <TextView
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="@dimen/_20sdp"
             android:background="@drawable/mycomment">
 
             <TextView
@@ -50,10 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="1dp"
+                android:layout_margin="@dimen/_1sdp"
                 android:gravity="center"
-                android:minWidth="60dp"
-                android:paddingRight="25dp"
+                android:minWidth="@dimen/_60sdp"
+                android:paddingRight="@dimen/_25sdp"
                 android:text=" إذا ما طمحت الى غاية .. ركبت المنى ونسيت الحذر  " />
 
         </FrameLayout>
@@ -63,10 +63,10 @@
         android:id="@+id/tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         android:gravity="center"
-        android:paddingRight="10dp"
+        android:paddingRight="@dimen/_10sdp"
         android:text="12:20 AM"
-        android:textSize="11sp" />
+        android:textSize="@dimen/_11sdp" />
 </RelativeLayout>

@@ -1,16 +1,13 @@
 package com.example.abedeid.myapplication.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.example.abedeid.myapplication.R;
 import com.example.abedeid.myapplication.model.Schedule;
@@ -95,11 +92,23 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
 
 
 //        holder.doctor.setText(Html.fromHtml(("<h1 style=\"color :red ;\">"+schedule.Doctor_name.trim()+"</h1>")));
-        holder.doctor.setText(schedule.Doctor_name.trim());
+        if (schedule.Doctor_name != null) {
+            holder.doctor.setVisibility(View.VISIBLE);
+            holder.doctor.setText(schedule.Doctor_name);
+        }else{
+
+            holder.section.setVisibility(View.VISIBLE);
+            holder.section.setText(schedule.section_name);
+            holder.year.setVisibility(View.VISIBLE);
+            holder.year.setText(schedule.year_name);
+            holder.depart.setVisibility(View.VISIBLE);
+            holder.depart.setText(schedule.dept_name);
+
+        }
         holder.to.setText(to.trim());
         holder.from.setText(from.trim());
         holder.place.setText(schedule.place.trim());
-        holder.subject.setText(schedule.subject_name.trim());
+        holder.subject.setText(schedule.subject_name);
 
     }
 
@@ -109,14 +118,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView doctor, subject, place, from, to;
+        TextView doctor, subject, place, from, to, year, section, depart;
         ImageView time_now;
         CardView schedule_card;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             doctor = (TextView) itemView.findViewById(R.id.doctor);
+            doctor = (TextView) itemView.findViewById(R.id.doctor);
+            depart = (TextView) itemView.findViewById(R.id.SCH_depart);
+            section = (TextView) itemView.findViewById(R.id.SCH_section);
             subject = (TextView) itemView.findViewById(R.id.subject);
+            year = (TextView) itemView.findViewById(R.id.SCH_year);
             to = (TextView) itemView.findViewById(R.id.to);
             from = (TextView) itemView.findViewById(R.id.from);
             place = (TextView) itemView.findViewById(R.id.place);

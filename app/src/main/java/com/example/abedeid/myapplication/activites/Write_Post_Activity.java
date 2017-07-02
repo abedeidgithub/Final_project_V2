@@ -60,14 +60,9 @@ public class Write_Post_Activity extends AppCompatActivity  {
     ImageView upload;
     @BindView(R.id.post_yaer)
     Spinner _year;
-    @BindView(R.id.post_department)
-    Spinner _depart;
-    @BindView(R.id.post_section)
-    Spinner _section;
-    @BindView(R.id.pdialog)
-    ProgressBar pdBar;
-    List<String> section = new ArrayList<String>();
-    List<String> depart = new ArrayList<String>();
+    @BindView(R.id.post_image)
+    Spinner  _image;
+
     @BindView(R.id.btn_w_post)
     Button btn_w_post;
     @BindView(R.id.post_w_t)
@@ -75,13 +70,13 @@ public class Write_Post_Activity extends AppCompatActivity  {
     TextView addimage;
     ImageView image;
     ImageView Upload_image;
+    final users users = Session.getInstance().getUser();
 
     String mediaPath;
      String[] mediaColumns = { MediaStore.Video.Media._ID };
-
+    Post post = new Post();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        imageutils = new Imageutils(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write__post_);
         ButterKnife.bind(this);
@@ -89,8 +84,6 @@ public class Write_Post_Activity extends AppCompatActivity  {
         image = (ImageView) findViewById(R.id.post_w_i);
         Upload_image = (ImageView) findViewById(R.id.Upload_image);
         final TextView name = (TextView) findViewById(R.id.post_w_n);
-        addimage = (TextView) findViewById(R.id.addimage);
-        final users users = Session.getInstance().getUser();
         if (users != null) {
             name.setText(users.name);
             Glide.with(getApplicationContext())
@@ -102,19 +95,16 @@ public class Write_Post_Activity extends AppCompatActivity  {
         btn_w_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pdBar.setIndeterminate(true);
 
 
 
                 String txt = post_w_t.getText().toString().trim();
-                if (!txt.isEmpty()) {
+                if (!txt.isEmpty() || i!=0) {
 
-                    PostUpload post = new PostUpload();
-                    post.users_id = users.idstudent;
+
+                    post.users_id = users.users_id;
                     post.text = txt;
-                    post.year_id = users.year_id;
-                    post.depart_id = users.depart_id;
-                    post.section_id = users.section_id;
+
                     if(i==1) {
                         uploadFile();
                         post.image=file.getName();
@@ -154,19 +144,7 @@ public class Write_Post_Activity extends AppCompatActivity  {
         });
 
 
-        addimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addimage.setVisibility(View.GONE);
-//                imageutils.imagepicker(1);
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                 startActivityForResult(galleryIntent, 0);
 
-i=1;
-                Upload_image.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
 
@@ -174,20 +152,15 @@ i=1;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            // When an Image is picked
-            if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
-
-                // Get the Image from data
-                Uri selectedImage = data.getData();
+             if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
+                 Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
                 Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                 assert cursor != null;
                 cursor.moveToFirst();
-
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 mediaPath = cursor.getString(columnIndex);
-                 Upload_image.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
+                Upload_image.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
                 cursor.close();
 
             } else {
@@ -237,35 +210,30 @@ i=1;
     }
 
     private void initCustomSpinner() {
-        section.add("section");
-        depart.add("depart");
 
 
-        // Spinner Drop down elements
-        final List<String> year = new ArrayList<String>();
-        year.add("year");
-        WebService.getInstance().getApi().getYear().enqueue(new Callback<List<com.example.abedeid.myapplication.model.year>>() {
 
-            @Override
-            public void onResponse(Call<List<year>> call, Response<List<year>> response) {
-                for (byte i = 0; i < response.body().size(); i++)
-                    year.add(response.body().get(i).year_name + "");
-            }
-
-            @Override
-            public void onFailure(Call<List<year>> call, Throwable t) {
-//                Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+         final List<String> year = new ArrayList<String>();
+        year.add("Post");
+        year.add("ask");
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, year);
         dataAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         _year.setAdapter(dataAdapter);
         _year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                yearData = parent.getItemAtPosition(position).toString();
+                if(position ==1){
+                     post.type=1+"";
+                    post.depart_id=users.depart_id;
+                    post.section_id=null;
+                    post.year_id=null;
+                }else{
+                     post.type=0+"";
+                    post.year_id = users.year_id;
+                    post.depart_id = users.depart_id;
+                    post.section_id = users.section_id;
+
+                }
 
             }
 
@@ -273,24 +241,27 @@ i=1;
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        WebService.getInstance().getApi().getsection().enqueue(new Callback<List<com.example.abedeid.myapplication.model.Section>>() {
-            @Override
-            public void onResponse(Call<List<Section>> call, Response<List<Section>> response) {
-                for (byte i = 0; i < response.body().size(); i++)
-                    section.add(response.body().get(i).section_name + "");
-            }
-
-            @Override
-            public void onFailure(Call<List<Section>> call, Throwable t) {
-            }
-        });
-        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, section);
-        dataAdapter3.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        _section.setAdapter(dataAdapter3);
-        _section.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+         final List<String> post_image = new ArrayList<String>();
+        post_image.add("no image");
+        post_image.add("with image");
+        final ArrayAdapter<String> post_imageAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, post_image);
+        post_imageAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        _image.setAdapter(post_imageAdapter);
+        _image.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sectionData = parent.getItemAtPosition(position).toString();
+                 if(position ==1){
+                     Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(galleryIntent, 0);
+
+                    i=1;
+                    Upload_image.setVisibility(View.VISIBLE);
+                }else{
+                    Upload_image.setVisibility(View.GONE);
+                    i=0;
+
+                }
 
             }
 
@@ -298,31 +269,7 @@ i=1;
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        WebService.getInstance().getApi().getdepartment().enqueue(new Callback<List<com.example.abedeid.myapplication.model.Department>>() {
-            @Override
-            public void onResponse(Call<List<Department>> call, Response<List<Department>> response) {
-                for (byte i = 0; i < response.body().size(); i++)
-                    depart.add(response.body().get(i).dept_name + "");
-            }
 
-            @Override
-            public void onFailure(Call<List<Department>> call, Throwable t) {
-            }
-        });
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, depart);
-        dataAdapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        _depart.setAdapter(dataAdapter2);
-        _depart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                departData = parent.getItemAtPosition(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
 

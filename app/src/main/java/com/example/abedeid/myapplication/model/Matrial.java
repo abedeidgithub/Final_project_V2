@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Matrial {
 
-
     @SerializedName("createdat")
     public String createdat;
     @SerializedName("updatedat")
@@ -19,4 +18,10 @@ public class Matrial {
     public String URL;
     @SerializedName("name")
     public String subject;
+//
+//    @SerializedName("name")
+//    public String name;
+
+
+
 }

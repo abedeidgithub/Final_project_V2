@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
@@ -36,12 +35,11 @@ import java.util.List;
  * Created by abed_eid on 10/12/2016.
  */
 
-public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Post> postList;
     Context context;
 
-    public PostsAdapter(List<Post> postList, Context context) {
-        postList.add(null);
+    public AskAdapter(List<Post> postList, Context context) {
         this.postList = postList;
         this.context = context;
     }
@@ -53,14 +51,13 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_ask_item, parent, false));
 
-        } else if (viewType == CommentType.SENT_IMAGE) {
+        } else {
             return new MyViewImageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_ask_item_img, parent, false));
 
 
-        } else {
-
-            return new Write_post(LayoutInflater.from(parent.getContext()).inflate(R.layout.write, parent, false));
         }
+
+
 
 
     }
@@ -70,15 +67,11 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
         Post post = postList.get(position);
-         if (position == 0) {
-            return 10;
-        }
+
         if (post.post_image.isEmpty()) {
-            Log.d("TAGES", post.post_image);
-            return CommentType.SENT_TXT;
+             return CommentType.SENT_TXT;
         } else if (!post.post_image.isEmpty()) {
-            Log.d("TAGES", post.post_image);
-            return CommentType.SENT_IMAGE;
+             return CommentType.SENT_IMAGE;
         }
         return super.getItemViewType(position);
     }
@@ -89,14 +82,15 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         final Post CurrentPost = postList.get(position);
 
         if (type == CommentType.SENT_TXT) {
-            final PostsAdapter.MyViewHolder holder = (PostsAdapter.MyViewHolder) mholder;
+            final AskAdapter.MyViewHolder holder = (AskAdapter.MyViewHolder) mholder;
             holder.post_txt.setText(CurrentPost.text);
             holder.writer_post_name.setText(CurrentPost.name);
             holder.writer_post_time.setText((CurrentPost.createdat));
             holder.comment_number.setText(CurrentPost.comments + " Comments");
-            if( CurrentPost.type.equals("0")){
+            if(!CurrentPost.type.equals("0")){
                 holder.type.setVisibility(View.VISIBLE);
-                holder.type.setBackgroundResource(R.drawable.post);
+                holder.type.setBackgroundResource(R.drawable.ask);
+
             }
 //
             holder.comment.setOnClickListener(new View.OnClickListener() {
@@ -113,14 +107,14 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         } else if (type == CommentType.SENT_IMAGE) {
 
-            final PostsAdapter.MyViewImageHolder holder = (PostsAdapter.MyViewImageHolder) mholder;
+            final AskAdapter.MyViewImageHolder holder = (AskAdapter.MyViewImageHolder) mholder;
              holder.post_txt.setText(CurrentPost.text);
             holder.writer_post_name.setText(CurrentPost.name);
             holder.writer_post_time.setText((CurrentPost.createdat));
-            holder.comment_number.setText(CurrentPost.comments + " Comments");
-            if(CurrentPost.type.equals("0")){
+            holder.comment_number.setText(CurrentPost.comments + "  Answers");
+            if(!CurrentPost.type.equals("0")){
                 holder.type.setVisibility(View.VISIBLE);
-                holder.type.setBackgroundResource(R.drawable.post);
+                holder.type.setBackgroundResource(R.drawable.ask);
 
             }
             if (!CurrentPost.post_image.isEmpty()) {
@@ -159,17 +153,6 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     .load(Urls.Local_images + CurrentPost.post_image)
                     .into(holder.post_imge);
 
-        } else {
-            final PostsAdapter.Write_post holder = (PostsAdapter.Write_post) mholder;
-            holder.write_post.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, Write_Post_Activity.class);
-                    (context).startActivity(intent);
-                }
-            });
-
-
         }
     }
 
@@ -201,14 +184,7 @@ public class PostsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public class Write_post extends RecyclerView.ViewHolder {
-        RelativeLayout write_post;
 
-        public Write_post(View itemView) {
-            super(itemView);
-            write_post = (RelativeLayout) itemView.findViewById(R.id.write_post_card);
-        }
-    }
 
     public class MyViewImageHolder extends RecyclerView.ViewHolder {
         TextView writer_post_name, writer_post_time, comment_number;

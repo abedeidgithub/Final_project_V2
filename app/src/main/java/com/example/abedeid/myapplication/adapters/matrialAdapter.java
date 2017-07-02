@@ -61,14 +61,14 @@ public class matrialAdapter extends RecyclerView.Adapter<matrialAdapter.MyViewHo
         final Matrial CurrentPost = postList.get(position);
         holder.matrial_time.setText(CurrentPost.updatedat);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date convertedDate = new Date();
-        try {
-            convertedDate = dateFormat.parse(CurrentPost.updatedat);
-        } catch (ParseException e) {
-             e.printStackTrace();
-        }
-        holder.matrial_name.setText(CurrentPost.subject);
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        Date convertedDate = new Date();
+//        try {
+//            convertedDate = dateFormat.parse(CurrentPost.updatedat);
+//        } catch (ParseException e) {
+//             e.printStackTrace();
+//        }
+        holder.matrial_name.setText(CurrentPost.subject+"");
         holder.matrial_txt.setText(CurrentPost.desc);
         holder.matrial_card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,14 +107,16 @@ public class matrialAdapter extends RecyclerView.Adapter<matrialAdapter.MyViewHo
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        RelativeTimeTextView  matrial_time;
+//        RelativeTimeTextView  matrial_time;
+        TextView  matrial_time;
         TextView matrial_txt;
         TextView matrial_name;
         CardView matrial_card;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            matrial_time = (RelativeTimeTextView ) itemView.findViewById(R.id.matrial_time);
+            matrial_time = (TextView ) itemView.findViewById(R.id.matrial_time);
+//            matrial_time = (RelativeTimeTextView ) itemView.findViewById(R.id.matrial_time);
             matrial_txt = (TextView) itemView.findViewById(R.id.matrial_txt);
             matrial_name = (TextView) itemView.findViewById(R.id.matrial_name);
             matrial_card = (CardView) itemView.findViewById(R.id.matrial_card);

@@ -34,4 +34,8 @@ public class Post {
     public String isAdmin;
     @SerializedName("comments")
     public String comments;
+    @SerializedName("type")
+    public String type;
+    @SerializedName("image")
+    public String image;
 }

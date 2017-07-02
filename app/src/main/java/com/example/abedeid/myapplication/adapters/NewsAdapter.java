@@ -49,15 +49,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         final news CurrentPost = postList.get(position);
         holder.post_txt.setText(CurrentPost.news_txt);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date convertedDate = new Date();
-        try {
-            convertedDate = dateFormat.parse(CurrentPost.updatedat);
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        holder.writer_post_time.setReferenceTime(convertedDate.getTime());
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        Date convertedDate = new Date();
+//        try {
+//            convertedDate = dateFormat.parse(CurrentPost.updatedat);
+//        } catch (ParseException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        holder.writer_post_time.setReferenceTime(convertedDate.getTime());
+        holder.writer_post_time.setText(CurrentPost.updatedat);
 
         Glide.with(context).load(Urls.Local_images+CurrentPost.news_img).into(holder.image_post) ;
 

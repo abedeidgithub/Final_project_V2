@@ -82,7 +82,7 @@ public class ScheduleFragment extends Fragment {
             public void onClick(View view) {
                 get(now+"");
 
-                 today.setBackgroundResource(R.drawable.shadow);
+                 today.setBackgroundResource(R.drawable.white_shadow);
                 tomorrow.setBackgroundResource(0);
                 yesterday.setBackgroundResource( 0);
             }
@@ -94,7 +94,7 @@ public class ScheduleFragment extends Fragment {
                 get((now+1)+"");
 
 
-                tomorrow.setBackgroundResource(R.drawable.shadow);
+                tomorrow.setBackgroundResource(R.drawable.white_shadow);
                 today.setBackgroundResource(0);
                 yesterday.setBackgroundResource( 0);
             }
@@ -104,7 +104,7 @@ public class ScheduleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 get((now-1)+"");
-                yesterday.setBackgroundResource(R.drawable.shadow);
+                yesterday.setBackgroundResource(R.drawable.white_shadow);
                 today.setBackgroundResource(0);
                 tomorrow.setBackgroundResource( 0);
             }
@@ -114,14 +114,7 @@ public class ScheduleFragment extends Fragment {
 
     void get(String day) {
         users users = Session.getInstance().getUser();
-        if (users != null) {
-            Toast.makeText(getContext(), users.email, Toast.LENGTH_SHORT).show();
 
-        } else {
-            Toast.makeText(getContext(), "Null", Toast.LENGTH_SHORT).show();
-
-
-        }
         final ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("Loading ...");
@@ -151,7 +144,7 @@ public class ScheduleFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<Schedule>> call, Throwable t) {
-
+                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 //            setNormalMode();

@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                     s.email = etEmail.getText().toString();
                     s.password = etPassword.getText().toString();
 
-//                    // login User using Retrofit
 
                     WebService.getInstance().getApi().loginUsers(s).enqueue(new Callback<List<users>>() {
                         @Override
@@ -107,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Intent gotohome = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(gotohome);
                                     finish();
+
 
 
                                 } else {

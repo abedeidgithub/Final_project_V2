@@ -11,9 +11,9 @@
         android:id="@+id/post_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         android:background="@color/colorWhite"
-        android:elevation="10dp"
-        app:cardCornerRadius="5dp">
+        android:background="@color/colorWhite"
+        android:elevation="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_5sdp">
 
         <LinearLayout
             android:id="@+id/post_item"
@@ -24,51 +24,66 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
+                android:layout_margin="@dimen/_10sdp">
 
                 <ImageView
-
                     android:id="@+id/image_post"
-                    android:layout_width="100px"
-                    android:layout_height="100px"
-                    android:layout_margin="10dp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_margin="@dimen/_10sdp"
                     app:srcCompat="@drawable/camera" />
 
                 <LinearLayout
-                    android:id="@+id/writer_post"
+                    android:weightSum="10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/writer_post_name"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_weight="9"
+                        android:id="@+id/writer_post"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:padding="10dp"
-                        android:text="Name"
-                        android:textColor="#111"
-                        android:textSize="19dp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/writer_post_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10 hrs"
-                        android:textColor="#979797"
-                        android:textSize="10dp" />
+                        <TextView
+                            android:id="@+id/writer_post_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:padding="@dimen/_10sdp"
+                            android:text="Name"
+                            android:textColor="#111"
+                            android:textSize="@dimen/_15sdp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/writer_post_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10 hrs"
+                            android:textColor="#979797"
+                            android:textSize="@dimen/_10sdp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_weight="1"
+                         android:id="@+id/type"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                         />
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp">
 
                 <ImageView
                     android:id="@+id/post_imge"
@@ -80,11 +95,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                     android:paddingBottom="10dp"
+                    android:paddingBottom="10dp"
                     android:text="fffffffffffffffffffffffffffffffffffffffffffffffffffffff\ndddddddddddddddd\nddddddddd\nf"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                   />
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -103,14 +117,14 @@
                     android:id="@+id/comment_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
                     android:text="4 comments"
-                    android:textSize="15dp" />
+                    android:textSize="@dimen/_15sdp" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:src="@drawable/comment" />
 
 

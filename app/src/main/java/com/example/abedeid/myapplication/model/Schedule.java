@@ -19,10 +19,16 @@ public class Schedule {
     public String day_name;
     @SerializedName("place")
     public String place;
-    @SerializedName("subject_image")
-    public String subject_image;
     @SerializedName("subject_name")
     public String subject_name;
     @SerializedName("Doctor name ")
     public String Doctor_name ;
+
+
+    @SerializedName("year_name")
+    public String year_name;
+    @SerializedName("section_name")
+    public String section_name;
+    @SerializedName("dept_name")
+    public String dept_name;
 }

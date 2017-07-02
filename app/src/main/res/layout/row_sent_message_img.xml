@@ -14,17 +14,17 @@
              android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:background="@drawable/ss">
 
             <ImageView
                 android:id="@+id/img_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/placeholder" />
@@ -39,8 +39,8 @@
 
             <ImageView
                 android:id="@+id/img_profile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/bg" />
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="Ahmed" />
+                android:text="Ahmed eid" />
         </LinearLayout>
     </LinearLayout>
 
@@ -58,8 +58,8 @@
         android:id="@+id/tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="@dimen/_4sdp"
         android:gravity="center"
         android:text="12:20 AM"
-        android:textSize="11sp" />
+        android:textSize="@dimen/_11sdp" />
 </LinearLayout>

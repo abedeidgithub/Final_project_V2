@@ -96,8 +96,14 @@ public class Profile extends Fragment {
 
         final users users = Session.getInstance().getUser();
         if (users != null) {
+            if(users.year_name!=null){
+
             year_Profil.setText("year : " + users.year_name);
-            section_Profil.setText("section : " + users.section_name);
+            }
+            if(users.year_name!=null){
+                section_Profil.setText("section : " + users.section_name);
+
+            }
             depart_Profil.setText("deptarment : " + users.dept_name);
             user_profile_name.setText(users.name);
             user_profile_email.setText(users.email.toString());

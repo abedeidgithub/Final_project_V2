@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import com.example.abedeid.myapplication.Fragments.Ask;
 import com.example.abedeid.myapplication.Fragments.News;
 import com.example.abedeid.myapplication.Fragments.PostOrAsk;
 import com.example.abedeid.myapplication.Fragments.Profile;
@@ -66,16 +67,18 @@ public class HomeActivity extends AppCompatActivity {
 
     public void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
-        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(3).setIcon(tabIcons[2]);
+        tabLayout.getTabAt(4).setIcon(tabIcons[3]);
+        tabLayout.getTabAt(5).setIcon(tabIcons[4]);
 
     }
 
     public void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new PostOrAsk() );
+        adapter.addFragment(new Ask() );
         adapter.addFragment(new Profile() );
         adapter.addFragment(new News() );
         adapter.addFragment(new material() );
