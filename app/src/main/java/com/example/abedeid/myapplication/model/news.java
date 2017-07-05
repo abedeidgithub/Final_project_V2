@@ -42,9 +42,9 @@ public class news implements Parcelable {
     public String news_view;
     @SerializedName("id_admin")
     public int id_admin;
-    @SerializedName("createdat")
+    @SerializedName("created_at")
     public String createdat;
-    @SerializedName("updatedat")
+    @SerializedName("updated_at")
     public String updatedat;
 
 

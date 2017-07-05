@@ -75,6 +75,7 @@ public class material extends Fragment {
         s.verify=users.verify;
         s.status=users.status;
         s.message=users.message;
+        s.doctor_id=users.doctor_id;
         postList = new ArrayList<>();
         linearLayoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(linearLayoutManager);
@@ -99,7 +100,7 @@ public class material extends Fragment {
         WebService.getInstance().getApi().getmatrial(s).enqueue(new Callback<List<Matrial>>() {
             @Override
             public void onResponse(Call<List<Matrial>> call, Response<List<Matrial>> response) {
-                  postList.addAll(response.body());
+               postList.addAll(response.body());
                 adapter.notifyItemRangeInserted(adapter.getItemCount(),postList.size()-1);
             }
 

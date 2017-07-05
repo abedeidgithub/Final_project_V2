@@ -16,9 +16,10 @@
         android:textSize="@dimen/_11sdp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end">
+        android:layout_gravity="end"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -28,11 +29,11 @@
             android:padding="@dimen/_2sdp">
 
             <ImageView
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
                 android:id="@+id/img_profile"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/bg" />
 
             <TextView
@@ -40,11 +41,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="Ahmed" />
+                android:text="Ahmedhjjjjjjjjjjjj" />
         </LinearLayout>
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginEnd="@dimen/_20sdp"
@@ -52,14 +53,14 @@
             android:background="@drawable/mycomment">
 
             <ImageView
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
                 android:id="@+id/img_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
                 android:layout_marginLeft="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_4sdp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:src="@drawable/placeholder" />
 
         </FrameLayout>

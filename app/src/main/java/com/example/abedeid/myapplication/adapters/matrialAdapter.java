@@ -68,7 +68,7 @@ public class matrialAdapter extends RecyclerView.Adapter<matrialAdapter.MyViewHo
 //        } catch (ParseException e) {
 //             e.printStackTrace();
 //        }
-        holder.matrial_name.setText(CurrentPost.subject+"");
+        holder.matrial_name.setText(CurrentPost.subject);
         holder.matrial_txt.setText(CurrentPost.desc);
         holder.matrial_card.setOnClickListener(new View.OnClickListener() {
             @Override

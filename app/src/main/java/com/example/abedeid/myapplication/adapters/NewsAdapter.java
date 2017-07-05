@@ -2,6 +2,7 @@ package com.example.abedeid.myapplication.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,17 +49,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
 
         final news CurrentPost = postList.get(position);
         holder.post_txt.setText(CurrentPost.news_txt);
+//        Log.d("TAG",CurrentPost.updatedat);
 
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//        Date convertedDate = new Date();
-//        try {
-//            convertedDate = dateFormat.parse(CurrentPost.updatedat);
-//        } catch (ParseException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        holder.writer_post_time.setReferenceTime(convertedDate.getTime());
-        holder.writer_post_time.setText(CurrentPost.updatedat);
+        String dateString = CurrentPost.updatedat;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-DD hh:mm:ss");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        holder.writer_post_time.setReferenceTime(convertedDate.getTime());
+//         holder.writer_post_time.setReferenceTime(new Date().getTime());
+//        holder.writer_post_time.setText(CurrentPost.updatedat);
 
         Glide.with(context).load(Urls.Local_images+CurrentPost.news_img).into(holder.image_post) ;
 
