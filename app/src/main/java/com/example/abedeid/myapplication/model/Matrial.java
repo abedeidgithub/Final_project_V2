@@ -8,19 +8,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class Matrial {
 
-    @SerializedName("createdat")
+    @SerializedName("created_at")
     public String createdat;
-    @SerializedName("updatedat")
+    @SerializedName("updated_at")
     public String updatedat;
     @SerializedName("desc")
     public String desc;
+    @SerializedName("lecture")
+    public String lecture;
     @SerializedName("URL")
     public String URL;
     @SerializedName("name")
     public String subject;
-//
-//    @SerializedName("name")
-//    public String name;
 
 
 

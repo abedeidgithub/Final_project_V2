@@ -7,16 +7,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Post {
-
     @SerializedName("id_post")
     public String id_post;
     @SerializedName("text")
     public String text;
     @SerializedName("post_image")
     public String post_image;
-    @SerializedName("createdat")
+    @SerializedName("created_at")
     public String createdat;
-    @SerializedName("updatedat")
+    @SerializedName("updated_at")
     public String updatedat;
     @SerializedName("section_id")
     public String section_id;
@@ -37,5 +36,4 @@ public class Post {
     @SerializedName("type")
     public String type;
     @SerializedName("image")
-    public String image;
-}
+    public String image;     }

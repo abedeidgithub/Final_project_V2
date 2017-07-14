@@ -83,33 +83,20 @@ public class material extends Fragment {
         adapter=new matrialAdapter(postList,getContext());
         recycler_view.setAdapter(adapter);
         Toast.makeText(getContext(), users.doctor_id, Toast.LENGTH_SHORT).show();
-
-
         getPostOfPages(s);
-
-
     }
 
-
-
-
-
     private void getPostOfPages(users s) {
-
-
         WebService.getInstance().getApi().getmatrial(s).enqueue(new Callback<List<Matrial>>() {
             @Override
             public void onResponse(Call<List<Matrial>> call, Response<List<Matrial>> response) {
                postList.addAll(response.body());
                 adapter.notifyItemRangeInserted(adapter.getItemCount(),postList.size()-1);
             }
-
             @Override
             public void onFailure(Call<List<Matrial>> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
     }
-
 }

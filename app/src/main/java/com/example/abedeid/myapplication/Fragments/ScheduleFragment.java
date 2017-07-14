@@ -114,13 +114,11 @@ public class ScheduleFragment extends Fragment {
 
     void get(String day) {
         users users = Session.getInstance().getUser();
-
         final ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("Loading ...");
         dialog.setIndeterminate(true);
         dialog.setCancelable(true);
-
         users user = Session.getInstance().getUser();
         if (users != null) {
             schedule_par schedule_par = new schedule_par();
@@ -137,17 +135,13 @@ public class ScheduleFragment extends Fragment {
                     recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
                     recycler_view.setItemAnimator(new DefaultItemAnimator());
                     recycler_view.setAdapter(adapter);
-
                     dialog.dismiss();
-
                 }
-
                 @Override
                 public void onFailure(Call<List<Schedule>> call, Throwable t) {
                     Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-//            setNormalMode();
         } else {
             Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
         }

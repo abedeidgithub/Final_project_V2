@@ -19,9 +19,9 @@ public class CommentModel {
     public String txt;
     @SerializedName("image")
     public String image;
-    @SerializedName("createdat")
+    @SerializedName("created_at")
     public String createdat;
-    @SerializedName("updatedat")
+    @SerializedName("updated_at")
     public String updatedat;
     @SerializedName("user_id")
     public int user_id;

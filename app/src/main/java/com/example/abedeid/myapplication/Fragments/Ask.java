@@ -32,9 +32,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Ask extends Fragment {
-
-
-
     private final String TAG = "PostOrAskTAG";
     List<Post> postList;
     RecyclerView recycler_view;
@@ -42,18 +39,13 @@ public class Ask extends Fragment {
     private int positionIndex;
     private int topView;
     private AskAdapter adapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ask, container, false);
+         View view = inflater.inflate(R.layout.fragment_ask, container, false);
         recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view_asks);
         return view;
     }
-
-
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -73,18 +65,13 @@ public class Ask extends Fragment {
             }
         });
         getPostOfPages(s);
-
-
     }
-
-
     @Override
     public void onPause() {
         super.onPause();
         positionIndex = linearLayoutManager.findFirstVisibleItemPosition();
 
     }
-
 
     @Override
     public void onResume() {

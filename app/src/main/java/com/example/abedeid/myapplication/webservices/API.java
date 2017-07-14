@@ -32,13 +32,11 @@ import retrofit2.http.Part;
 
 public interface API {
 
-
     @POST("selects/selct_user.php")
     Call<List<users>> loginUsers(@Body users users);
 
     @POST("selects/select_year.php")
     Call<List<year>> getYear();
-
 
     @POST(" selects/select_dept.php")
     Call<List<Department>> getdepartment();
@@ -55,17 +53,14 @@ public interface API {
     @POST("selects/select_ask.php")
     Call<List<Post>> Asks(@Body users users);
 
-
     @POST("selects/select_comments.php")
     Call<List<CommentModel>> getComments(@Body CommentModel commentModel);
 
     @POST("selects/select_news.php")
     Call<List<news>> getnews(@Body users s);
 
-
     @POST("selects/select_scheduale.php")
     Call<List<Schedule>> getSchedule(@Body schedule_par schedule_par);
-
 
     @POST("insert/insert_comment.php")
     Call<MainResponse> insert_Comment(@Body CommentUpload commentModel);
@@ -73,13 +68,11 @@ public interface API {
     @POST("insert/insert_post.php")
     Call<MainResponse> insert_Post( @Body Post post);
 
-
     @POST("update/update.php")
     Call<MainResponse> updateUser(@Body users s);
 
     @POST("selects/select_material.php")
     Call<List<Matrial>> getmatrial(@Body users users);
-
 
     @Multipart
     @POST("upload/upload.php")

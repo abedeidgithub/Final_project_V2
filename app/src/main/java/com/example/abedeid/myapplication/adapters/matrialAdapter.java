@@ -69,14 +69,14 @@ public class matrialAdapter extends RecyclerView.Adapter<matrialAdapter.MyViewHo
 //             e.printStackTrace();
 //        }
         holder.matrial_name.setText(CurrentPost.subject);
-        holder.matrial_txt.setText(CurrentPost.desc);
+        holder.matrial_txt.setText(CurrentPost.desc+" "+CurrentPost.lecture);
         holder.matrial_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                  String url = Urls.Local_URL+ CurrentPost.URL;
                 DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-                 request.setTitle("Dowenload SCU\n"+CurrentPost.subject+"\t "+CurrentPost.desc);
+                 request.setTitle("Dowenload SCU\n"+CurrentPost.subject+"\t "+CurrentPost.desc+" "+CurrentPost.lecture);
                  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                     request.allowScanningByMediaScanner();
                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

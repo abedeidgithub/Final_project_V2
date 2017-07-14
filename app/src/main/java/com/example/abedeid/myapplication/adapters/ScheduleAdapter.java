@@ -91,8 +91,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
         }
 
 
-//        holder.doctor.setText(Html.fromHtml(("<h1 style=\"color :red ;\">"+schedule.Doctor_name.trim()+"</h1>")));
-        if (schedule.Doctor_name != null) {
+         if (schedule.Doctor_name != null) {
             holder.doctor.setVisibility(View.VISIBLE);
             holder.doctor.setText(schedule.Doctor_name);
         }else{

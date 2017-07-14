@@ -10,8 +10,9 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -55,7 +56,7 @@
                         android:layout_height="wrap_content">
 
                         <Spinner
-                            android:id="@+id/post_yaer"
+                            android:id="@+id/post_yaerr"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_margin="@dimen/_2sdp"
@@ -72,7 +73,41 @@
                     </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/group"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
+                <Spinner
+                    android:id="@+id/yaer"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_spinner_background"
+                    android:spinnerMode="dropdown" />
+
+                <Spinner
+                    android:id="@+id/depart"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_spinner_background"
+                    android:spinnerMode="dropdown" />
+
+                <Spinner
+                    android:id="@+id/section"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_spinner_background"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
             <EditText
                 android:id="@+id/post_w_t"
                 android:layout_width="fill_parent"

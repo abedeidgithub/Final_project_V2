@@ -35,11 +35,6 @@ import retrofit2.Response;
 
 public class News extends Fragment {
 
-
-
-
-
-
     private final String TAG = "PostOrAskTAG";
     List<news> postList;
     RecyclerView recycler_view;
@@ -56,8 +51,6 @@ public class News extends Fragment {
         recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view_news);
         return view;
     }
-
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

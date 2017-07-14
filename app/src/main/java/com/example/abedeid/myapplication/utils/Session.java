@@ -54,8 +54,6 @@ public class Session {
                 logout();
                 loginUser(user);
             }
-
-
         }
 
         // logout
@@ -76,12 +74,9 @@ public class Session {
         public users getUser() {
             return realm.where(users.class).findFirst();
         }
-
         public void logoutAndGoToLogin(Activity activity) {
             logout();
             activity.startActivity(new Intent(activity, LoginActivity.class));
             activity.finish();
         }
-
-
-    }
+}
